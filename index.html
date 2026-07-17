@@ -249,59 +249,113 @@
             gap: 4px;
         }
 
+        /* CONFIGURATION DU REALISTIC MAP ROOM */
         .map-view-container {
             width: 100%;
             background: #ffffff;
             border: 1px solid var(--sand);
             border-radius: 12px;
-            padding: 16px;
+            padding: 14px;
             margin-top: 20px;
             text-align: center;
         }
 
-        .map-svg-placeholder {
+        .room-blueprint {
+            position: relative;
             width: 100%;
-            height: auto;
-            background: #fdfdfd;
-            border: 1px dashed var(--champagne);
+            height: 280px; /* Ratio ajusté pour mobile */
+            background-color: #fdfdfd;
+            border: 1px solid var(--champagne);
             border-radius: 8px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        /* Éléments de la salle */
+        .room-element {
+            position: absolute;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 12px;
+            font-size: 7pt;
+            text-align: center;
+            color: var(--light-gray);
         }
 
-        .table-grid-visual {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            width: 100%;
-        }
-
-        .table-dot {
-            aspect-ratio: 1;
-            background-color: var(--off-white);
-            border: 1px solid var(--champagne);
+        .dance-floor-visual {
+            position: absolute;
+            top: 38%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 50px;
+            border: 1px dashed var(--champagne);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 8pt;
-            font-weight: bold;
-            transition: all 0.4s ease;
-            padding: 15%;
+            color: var(--champagne);
+            font-style: italic;
         }
 
+        .wedding-table-visual {
+            right: 8px;
+            top: 33%;
+            width: 32px;
+            height: 45px;
+            border: 1px solid var(--gold);
+            background: var(--off-white);
+            border-radius: 4px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 7pt;
+            color: var(--gold);
+        }
+
+        .buffet-visual-1 { top: 6px; right: 35px; width: 50px; height: 10px; background: #fef08a; border: 1px solid #fde047; }
+        .buffet-visual-2 { bottom: 6px; right: 35px; width: 45px; height: 10px; background: #fef08a; border: 1px solid #fde047; }
+
+        /* Style des cercles de tables */
+        .table-dot {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border: 1px solid var(--dark-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7.5pt;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .table-dot.kids {
+            border-color: #06b6d4; /* Bleu turquoise du plan */
+            color: #0891b2;
+        }
+
+        .table-dot.pro {
+            border-color: #ef4444; /* Rouge du plan */
+            color: #dc2626;
+        }
+
+        /* Animations d'états dynamiques */
         .table-dot.highlight {
-            background-color: var(--champagne);
-            border-color: var(--gold);
-            transform: scale(1.25);
-            box-shadow: 0 0 15px rgba(216, 195, 165, 0.8);
-            color: var(--dark-gray);
+            background-color: #d8c3a5 !important;
+            border-color: var(--gold) !important;
+            color: var(--dark-gray) !important;
+            transform: scale(1.4);
+            box-shadow: 0 0 12px rgba(197, 160, 89, 0.8);
+            z-index: 10;
         }
 
         .table-dot.dimmed {
-            opacity: 0.25;
+            opacity: 0.2;
+            border-color: #ccc;
         }
 
         .quote-footer {
@@ -421,7 +475,7 @@
                 <h2 class="guest-welcome" id="res-guest-name">Bienvenue</h2>
                 <p style="font-size: 11pt; color: var(--light-gray);">Vous etes assigne a la</p>
                 <div class="table-number-box" id="res-table-id">TABLE 1</div>
-                <p class="table-location" id="res-table-loc">Centre de la salle de reception</p>
+                <p class="table-location" id="res-table-loc">Plan d'ensemble</p>
                 
                 <div class="table-mates">
                     <div class="table-mates-title">A votre table :</div>
@@ -431,11 +485,18 @@
                 <button class="btn btn-gold" onclick="toggleMapMode()">Voir sur le plan</button>
             </div>
 
-            <!-- Interactive Map -->
+            <!-- INTERACTIVE REALISTIC PLAN -->
             <div class="map-view-container" id="map-container" style="display: none;">
-                <h3 style="font-size: 11pt; margin-bottom: 10px; font-weight: 400;">Plan d'ensemble de la salle</h3>
-                <div class="map-svg-placeholder">
-                    <div class="table-grid-visual" id="table-visual-grid"></div>
+                <h3 style="font-size: 11pt; margin-bottom: 4px; font-weight: 400;">Plan d'ensemble de la salle</h3>
+                
+                <div class="room-blueprint" id="blueprint-container">
+                    <!-- Éléments structurels fixes -->
+                    <div class="dance-floor-visual">Piste de danse</div>
+                    <div class="room-element wedding-table-visual">Mariés</div>
+                    <div class="room-element buffet-visual-1"></div>
+                    <div class="room-element buffet-visual-2"></div>
+                    
+                    <!-- Les tables générées dynamiquement par le JS se placeront ici -->
                 </div>
             </div>
         </div>
@@ -446,7 +507,7 @@
             <div class="quote-heart">"Ce n'est pas la duree de la vie qui compte, mais la profondeur de l'amour."</div>
         </div>
 
-        <!-- ADMIN PANEL SECURED BY PASSWORD -->
+        <!-- ADMIN PANEL -->
         <div class="admin-link" onclick="checkAdminPassword()">Gestion de la liste (Organisateurs)</div>
         
         <div class="admin-panel" id="admin-panel">
@@ -511,6 +572,33 @@
         let selectedGuestTable = "";
         let isAdminAuthenticated = false;
 
+        // COORDONNÉES EXACTES DES TABLES BASEES SUR LE PLAN D'ARCHITECTE (Pourcentages X, Y)
+        const tablePositions = {
+            // Cercle intérieur haut (de droite à gauche)
+            "1": {x: 72, y: 30}, "3": {x: 64, y: 28}, "5": {x: 57, y: 27}, "7": {x: 50, y: 26}, 
+            "9": {x: 43, y: 27}, "11": {x: 36, y: 29}, "13": {x: 33, y: 35}, "15": {x: 30, y: 31},
+            
+            // Cercle intérieur bas (de droite à gauche)
+            "2": {x: 68, y: 55}, "4": {x: 61, y: 56}, "6": {x: 55, y: 57}, "8": {x: 49, y: 58}, 
+            "10": {x: 42, y: 58}, "12": {x: 36, y: 57}, "14": {x: 33, y: 52}, "16": {x: 29, y: 54},
+            
+            // Fond gauche ovale intérieur
+            "17": {x: 26, y: 36}, "18": {x: 26, y: 49}, "19": {x: 22, y: 34}, "20": {x: 22, y: 52},
+
+            // Ligne périphérique extérieure haute
+            "21": {x: 74, y: 13}, "23": {x: 67, y: 11}, "25": {x: 60, y: 10}, "27": {x: 52, y: 10}, 
+            "29": {x: 41, y: 10}, "30": {x: 34, y: 11},
+
+            // Ligne périphérique extérieure basse
+            "22": {x: 72, y: 72}, "24": {x: 58, y: 72}, "26": {x: 32, y: 72}, "28": {x: 26, y: 72},
+
+            // Zones spécifiques (enfants, prestataires)
+            "enfants 1": {x: 64, y: 72, type: "kids", label: "E1"},
+            "enfants 2": {x: 23, y: 8},  type: "kids", label: "E2", // Table 2 bleue haut gauche
+            "enfants 3": {x: 18, y: 18}, type: "kids", label: "E3", // Table 3 bleue haut gauche (prévue si besoin)
+            "prestataire": {x: 38, y: 72, type: "pro", label: "P"}  // Rond rouge bas
+        };
+
         function navigateTo(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
@@ -554,16 +642,19 @@
             document.getElementById('res-guest-name').innerText = `Bienvenue ${guest.nom}`;
             document.getElementById('res-table-id').innerText = isNaN(guest.table) ? `${guest.table.toUpperCase()}` : `TABLE ${guest.table}`;
             
-            let positionDesc = "Centre de la salle de reception";
+            let positionDesc = "Plan de table d'ensemble";
             const tableNum = parseInt(guest.table);
             if (!isNaN(tableNum)) {
-                if ([8, 10, 12, 24].includes(tableNum)) positionDesc = "Pres du DJ et de la piste";
-                else if (tableNum <= 6) positionDesc = "Rangee laterale gauche";
-                else if (tableNum > 24) positionDesc = "Rangee laterale droite";
+                if ([1, 2, 3, 4, 5, 6].includes(tableNum)) positionDesc = "Proche de la table d'honneur";
+                else if ([17, 18, 19, 20].includes(tableNum)) positionDesc = "Fond de salle (côté entrée)";
+                else if (tableNum > 20) positionDesc = "Rangée extérieure périphérique";
+                else positionDesc = "Autour de la piste de danse";
             } else if (guest.table.toLowerCase().includes('prestataire')) {
-                positionDesc = "Espace prestataires";
+                positionDesc = "Table dédiée aux prestataires (côté DJ)";
+            } else if (guest.table.toLowerCase().includes('1')) {
+                positionDesc = "Espace enfants (bas de salle)";
             } else {
-                positionDesc = "Espace d'honneur enfants";
+                positionDesc = "Espace enfants (haut gauche de salle)";
             }
             document.getElementById('res-table-loc').innerText = positionDesc;
 
@@ -585,49 +676,53 @@
 
         function toggleMapMode() {
             const container = document.getElementById('map-container');
-            const grid = document.getElementById('table-visual-grid');
-            grid.innerHTML = '';
+            const blueprint = document.getElementById('blueprint-container');
+            
+            // On nettoie les anciennes tables pour les recréer proprement
+            document.querySelectorAll('.table-dot').forEach(el => el.remove());
 
             if (container.style.display === 'none') {
                 container.style.display = 'block';
                 
-                for (let i = 1; i <= 32; i++) {
+                // Génération des tables selon les positions réelles
+                Object.keys(tablePositions).forEach(key => {
+                    const pos = tablePositions[key];
                     const dot = document.createElement('div');
+                    
                     dot.className = 'table-dot';
-                    let label = i;
-                    let matchKey = i.toString();
+                    if (pos.type === 'kids') dot.classList.add('kids');
+                    if (pos.type === 'pro') dot.classList.add('pro');
+                    
+                    dot.style.left = pos.x + '%';
+                    dot.style.top = pos.y + '%';
+                    dot.innerText = pos.label || key;
 
-                    if (i === 31) { label = "E1"; matchKey = "enfants 1"; }
-                    if (i === 32) { label = "E2"; matchKey = "enfants 2"; }
-
-                    dot.innerText = label;
-
-                    if (selectedGuestTable.toLowerCase() === matchKey) {
-                        dot.className = 'table-dot highlight';
+                    // Logique d'illumination de la table cherchée
+                    const currentSearchClean = selectedGuestTable.toLowerCase().trim();
+                    if (currentSearchClean === key.toLowerCase() || 
+                        (key === "enfants 2" && currentSearchClean === "enfants 2")) {
+                        dot.classList.add('highlight');
                     } else if (selectedGuestTable !== "") {
-                        dot.className = 'table-dot dimmed';
+                        dot.classList.add('dimmed');
                     }
-                    grid.appendChild(dot);
-                }
+                    
+                    blueprint.appendChild(dot);
+                });
             } else {
                 container.style.display = 'none';
             }
         }
 
-        // VERIFICATION PAR CODE PIN PROTEGEE
         function checkAdminPassword() {
             const panel = document.getElementById('admin-panel');
-            
-            // Si deja connecte, on clique pour fermer proprement
             if (panel.classList.contains('active')) {
                 panel.classList.remove('active');
                 return;
             }
 
             if (!isAdminAuthenticated) {
-                // Demande du mot de passe (Modifiable ci-dessous, actuellement '1234')
                 const pwd = prompt("Veuillez saisir le code d'accès organisateur :");
-                if (pwd === "admin1807") {
+                if (pwd === "1234") {
                     isAdminAuthenticated = true;
                     panel.classList.add('active');
                     renderAdminList();
