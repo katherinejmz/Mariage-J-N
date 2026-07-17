@@ -4,27 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mariage de Joannie & Nathan - Plan de Table</title>
+    <title>Mariage de Joannie & Nathan - 18.07.2026</title>
+    <!-- Importation de polices élégantes et romantiques -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --champagne: #D8C3A5;
             --off-white: #FAF8F4;
             --sand: #E8DDCF;
             --gold: #C5A059;
-            --dark-gray: #333333;
-            --light-gray: #888888;
+            --gold-light: rgba(197, 160, 89, 0.15);
+            --dark-gray: #2C2C2C;
+            --light-gray: #7A7A7A;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(216, 195, 165, 0.4);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Playfair Display', 'Didot', 'Georgia', serif;
         }
 
         body {
             background-color: var(--off-white);
             color: var(--dark-gray);
+            font-family: 'Montserrat', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -33,26 +40,28 @@
             position: relative;
         }
 
-        body::before {
-            content: "";
+        /* DÉCORATIONS BOTANIQUES AUX QUATRE COINS (SVG Intégrés) */
+        .botanical-corner {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(rgba(216, 195, 165, 0.1) 1px, transparent 0);
-            background-size: 24px 24px;
-            z-index: -1;
+            width: 140px;
+            height: 140px;
+            opacity: 0.35;
             pointer-events: none;
+            z-index: 0;
         }
+        .top-left { top: 0; left: 0; }
+        .top-right { top: 0; right: 0; transform: scaleX(-1); }
+        .bottom-left { bottom: 0; left: 0; transform: scaleY(-1); }
+        .bottom-right { bottom: 0; right: 0; transform: scale(-1); }
 
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 450px;
             padding: 24px;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            z-index: 1; /* Passe au-dessus des fleurs d'arrière-plan */
         }
 
         .screen {
@@ -60,7 +69,7 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            animation: fadeIn 0.4s ease-in-out forwards;
+            animation: fadeIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
         .screen.active {
@@ -68,118 +77,151 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         #screen-home {
             justify-content: center;
             text-align: center;
-            padding-top: 60px;
+            padding-top: 50px;
         }
 
-        .logo-monogram {
-            font-size: 48pt;
+        .wedding-date {
+            font-size: 11pt;
+            letter-spacing: 4px;
+            text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 20px;
-            font-weight: 300;
-        }
-
-        .names-title {
-            font-size: 26pt;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
+            margin-bottom: 25px;
             font-weight: 400;
         }
 
+        .logo-monogram {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56pt;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .names-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32pt;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 300;
+            color: var(--dark-gray);
+        }
+
         .welcome-text {
-            font-size: 13pt;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 15pt;
             color: var(--light-gray);
             letter-spacing: 1px;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
             font-style: italic;
         }
 
         .divider {
-            width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: 25px 0;
+            color: var(--champagne);
+        }
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
             height: 1px;
-            background-color: var(--champagne);
-            margin: 20px 0;
+            background: linear-gradient(to right, transparent, var(--champagne), transparent);
+        }
+        .divider-flower {
+            margin: 0 15px;
+            font-size: 14pt;
         }
 
         .btn {
-            background-color: var(--champagne);
+            background: linear-gradient(135deg, var(--champagne), var(--sand));
             color: var(--dark-gray);
-            border: 1px solid transparent;
-            padding: 14px 28px;
-            font-size: 12pt;
-            letter-spacing: 1px;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 16px 32px;
+            font-size: 11pt;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 50px;
             transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
-            font-weight: 600;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            font-weight: 400;
+            box-shadow: 0 4px 15px rgba(216, 195, 165, 0.4);
         }
 
         .btn:hover, .btn:active {
-            background-color: var(--sand);
-            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+            background: linear-gradient(135deg, var(--sand), var(--champagne));
         }
 
         .btn-gold {
-            background-color: var(--gold);
+            background: linear-gradient(135deg, var(--gold), #b38f4b);
             color: white;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
         }
 
         .btn-secondary {
-            background-color: transparent;
+            background: transparent;
             border: 1px solid var(--champagne);
             color: var(--dark-gray);
-            padding: 8px 16px;
-            font-size: 10pt;
+            padding: 9px 18px;
+            font-size: 9pt;
+            border-radius: 30px;
+            box-shadow: none;
+            letter-spacing: 1px;
         }
 
         .search-box {
             width: 100%;
             position: relative;
-            margin-top: 20px;
+            margin-top: 30px;
             margin-bottom: 20px;
         }
 
         .search-input {
             width: 100%;
-            padding: 16px 20px;
+            padding: 18px 24px;
             font-size: 12pt;
-            border: 1px solid var(--champagne);
+            font-family: inherit;
+            border: 1px solid var(--glass-border);
             background-color: white;
-            border-radius: 8px;
+            border-radius: 50px;
             outline: none;
             color: var(--dark-gray);
-            transition: border-color 0.3s;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            transition: all 0.3s;
         }
 
         .search-input:focus {
             border-color: var(--gold);
-            box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.1);
+            box-shadow: 0 4px 20px var(--gold-light);
         }
 
         .suggestions-list {
             list-style: none;
             width: 100%;
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             border: 1px solid var(--sand);
-            border-radius: 8px;
-            margin-top: 8px;
+            border-radius: 16px;
+            margin-top: 10px;
             max-height: 240px;
             overflow-y: auto;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
         }
 
         .suggestion-item {
-            padding: 14px 20px;
+            padding: 16px 24px;
             border-bottom: 1px solid var(--off-white);
             cursor: pointer;
             font-size: 11pt;
@@ -192,80 +234,90 @@
             color: var(--gold);
         }
 
+        /* EFFET GLASSMORPHISM SUR LA CARTE RÉSULTAT */
         .result-card {
-            background: white;
-            border: 1px solid var(--sand);
-            border-radius: 12px;
-            padding: 30px 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 35px 24px;
             text-align: center;
             width: 100%;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(44, 44, 44, 0.05);
+            margin-top: 25px;
+            position: relative;
         }
 
         .guest-welcome {
-            font-size: 16pt;
-            margin-bottom: 10px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22pt;
+            font-weight: 400;
+            margin-bottom: 6px;
         }
 
         .table-number-box {
-            font-size: 32pt;
-            font-weight: bold;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 38pt;
+            font-weight: 400;
             color: var(--gold);
-            margin: 20px 0;
-            letter-spacing: 1px;
+            margin: 15px 0;
+            letter-spacing: 2px;
         }
 
         .table-location {
-            font-size: 11pt;
+            font-size: 10.5pt;
             color: var(--light-gray);
             font-style: italic;
-            margin-bottom: 24px;
+            margin-bottom: 30px;
         }
 
         .table-mates {
             text-align: left;
-            background: var(--off-white);
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 24px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(216, 195, 165, 0.2);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 30px;
         }
 
         .table-mates-title {
-            font-size: 10pt;
+            font-size: 9pt;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--light-gray);
-            margin-bottom: 10px;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 12px;
             font-weight: 600;
+            text-align: center;
         }
 
         .mates-list {
-            font-size: 11pt;
-            line-height: 1.6;
+            font-size: 10.5pt;
+            line-height: 1.8;
             list-style-type: none;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4px;
+            color: var(--dark-gray);
         }
 
-        /* MAP CONFIGURATION (RESPONSIVE SVG CANVAS) */
+        /* MAP DESIGN */
         .map-view-container {
             width: 100%;
             background: #ffffff;
             border: 1px solid var(--sand);
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border-radius: 20px;
+            padding: 18px;
+            margin-top: 24px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.02);
         }
 
         .map-wrapper {
             position: relative;
             width: 100%;
             background: #fafaf8;
-            border: 1px solid var(--champagne);
-            border-radius: 6px;
+            border: 1px solid rgba(216, 195, 165, 0.5);
+            border-radius: 12px;
             padding: 5px;
         }
 
@@ -275,172 +327,150 @@
             display: block;
         }
 
-        /* SVG Table states styles */
         .svg-table {
             fill: #ffffff;
-            stroke: #333333;
+            stroke: #444444;
             stroke-width: 1.2px;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .svg-text {
-            font-family: sans-serif;
-            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
             font-size: 10px;
-            fill: #333333;
+            fill: #444444;
             text-anchor: middle;
             dominant-baseline: central;
             pointer-events: none;
         }
 
-        /* Styles spéciaux des types de cercles */
         .svg-table.kids { stroke: #00b4d8; stroke-width: 1.5px; }
         .svg-table.kids + text { fill: #0077b6; }
 
         .svg-table.pro { stroke: #ef4444; stroke-width: 1.5px; }
         .svg-table.pro + text { fill: #b91c1c; }
 
-        /* États d'interactions */
         .svg-table.highlight {
-            fill: #d8c3a5 !important;
-            stroke: #c5a059 !important;
-            stroke-width: 3px !important;
-            filter: drop-shadow(0px 0px 6px rgba(197, 160, 89, 0.7));
+            fill: #e8ddcf !important;
+            stroke: var(--gold) !important;
+            stroke-width: 3.5px !important;
+            filter: drop-shadow(0px 0px 8px rgba(197, 160, 89, 0.8));
         }
         .svg-table.highlight + text {
-            fill: #333333 !important;
+            fill: var(--dark-gray) !important;
             font-size: 12px !important;
         }
 
         .svg-table.dimmed {
-            opacity: 0.15;
-            stroke: #bbbbbb;
+            opacity: 0.12;
+            stroke: #cccccc;
         }
         .svg-table.dimmed + text {
-            opacity: 0.15;
+            opacity: 0.12;
         }
 
         .quote-footer {
             margin-top: auto;
-            padding: 40px 0 20px 0;
+            padding: 50px 0 20px 0;
             text-align: center;
-            font-size: 10pt;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 12pt;
             color: var(--light-gray);
-            line-height: 1.5;
-            font-style: italic;
+            line-height: 1.6;
         }
 
         .quote-heart {
+            font-size: 10.5pt;
             color: var(--gold);
-            margin-top: 4px;
+            margin-top: 6px;
+            font-style: italic;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.5px;
         }
 
         .admin-link {
-            font-size: 9pt;
+            font-size: 8.5pt;
             color: var(--light-gray);
-            text-decoration: underline;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             cursor: pointer;
-            margin-top: 25px;
+            margin-top: 20px;
             text-align: center;
             padding: 10px;
+            opacity: 0.6;
         }
 
         .admin-panel {
             display: none;
             background: white;
             border: 1px solid var(--gold);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 20px;
             margin-top: 20px;
             width: 100%;
-            text-align: left;
         }
 
-        .admin-panel.active {
-            display: block;
-        }
+        .admin-panel.active { display: block; }
 
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 9pt;
-            margin-bottom: 4px;
-            font-weight: bold;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--champagne);
-            border-radius: 4px;
-            font-size: 10pt;
-        }
-
-        .guest-row-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--off-white);
-            font-size: 10pt;
-        }
-
-        .delete-btn {
-            color: #c0392b;
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-size: 11pt;
-        }
-
-        .admin-list-container {
-            max-height: 200px;
-            overflow-y: auto;
-            margin-top: 15px;
-            border-top: 1px solid var(--sand);
-            padding-top: 10px;
-        }
+        .form-group { margin-bottom: 14px; text-align: left;}
+        .form-group label { display: block; font-size: 9pt; margin-bottom: 5px; font-weight: 600; color: var(--gold);}
+        .form-control { width: 100%; padding: 12px; border: 1px solid var(--champagne); border-radius: 8px; font-size: 10pt; font-family: inherit;}
+        .guest-row-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--off-white); font-size: 10pt; }
+        .delete-btn { color: #c0392b; cursor: pointer; background: none; border: none; font-size: 10pt; font-family: inherit;}
+        .admin-list-container { max-height: 200px; overflow-y: auto; margin-top: 15px; border-top: 1px solid var(--sand); padding-top: 10px; }
     </style>
 </head>
 <body>
+
+    <!-- GRAPHISMES BOTANIQUES DE COINS FLOREAUX -->
+    <svg class="botanical-corner top-left" viewBox="0 0 100 100">
+        <path d="M0,0 Q30,10 40,40 Q20,35 0,0" fill="none" stroke="#C5A059" stroke-width="0.8"/>
+        <path d="M0,0 Q10,30 40,40 Q35,20 0,0" fill="none" stroke="#C5A059" stroke-width="0.6"/>
+        <circle cx="40" cy="40" r="1.5" fill="#C5A059"/>
+        <path d="M0,15 C15,25 20,45 30,60" fill="none" stroke="#D8C3A5" stroke-width="0.5"/>
+        <path d="M15,0 C25,15 45,20 60,30" fill="none" stroke="#D8C3A5" stroke-width="0.5"/>
+        <circle cx="30" cy="60" r="1" fill="#D8C3A5"/>
+        <circle cx="60" cy="30" r="1" fill="#D8C3A5"/>
+    </svg>
+    <svg class="botanical-corner top-right" viewBox="0 0 100 100"></svg>
+    <svg class="botanical-corner bottom-left" viewBox="0 0 100 100"></svg>
+    <svg class="botanical-corner bottom-right" viewBox="0 0 100 100"></svg>
 
     <div class="container">
         
         <!-- SCREEN 1: HOME -->
         <div id="screen-home" class="screen active">
-            <div class="logo-monogram">*</div>
+            <p class="wedding-date">18 Juillet 2026</p>
+            <div class="logo-monogram">J & N</div>
             <h1 class="names-title">Joannie & Nathan</h1>
-            <p class="welcome-text">Bienvenue a notre mariage</p>
-            <div class="divider"></div>
+            <p class="welcome-text">Bienvenue à notre mariage</p>
+            <div class="divider"><span class="divider-flower">❀</span></div>
             <button class="btn" onclick="navigateTo('screen-search')">Trouver ma table</button>
         </div>
 
         <!-- SCREEN 2: SEARCH -->
         <div id="screen-search" class="screen">
-            <button class="btn btn-secondary" style="align-self: flex-start; margin-top:0;" onclick="navigateTo('screen-home')">&larr; Retour</button>
-            <h2 style="margin-top: 20px; font-weight: 400; letter-spacing: 1px;">Ou etes-vous place ?</h2>
+            <button class="btn btn-secondary" style="align-self: flex-start; margin-top:0;" onclick="navigateTo('screen-home')">← Retour</button>
+            <h2 style="margin-top: 30px; font-family: 'Cormorant Garamond', serif; font-size: 24pt; font-weight: 300; letter-spacing: 1px;">Où êtes-vous placés ?</h2>
             
             <div class="search-box">
-                <input type="text" id="search-input" class="search-input" placeholder="Rechercher votre prenom..." oninput="handleSearch(this.value)">
+                <input type="text" id="search-input" class="search-input" placeholder="Saisissez votre prénom..." oninput="handleSearch(this.value)">
                 <ul id="suggestions-list" class="suggestions-list" style="display: none;"></ul>
             </div>
         </div>
 
         <!-- SCREEN 3: RESULT -->
         <div id="screen-result" class="screen">
-            <button class="btn btn-secondary" style="align-self: flex-start; margin-top:0;" onclick="navigateTo('screen-search')">&larr; Nouvelle recherche</button>
+            <button class="btn btn-secondary" style="align-self: flex-start; margin-top:0;" onclick="navigateTo('screen-search')">← Recherche</button>
             
             <div class="result-card">
                 <h2 class="guest-welcome" id="res-guest-name">Bienvenue</h2>
-                <p style="font-size: 11pt; color: var(--light-gray);">Vous etes assigne a la</p>
+                <p style="font-size: 10pt; letter-spacing: 1px; text-transform: uppercase; color: var(--light-gray);">Vous êtes assigné à la</p>
                 <div class="table-number-box" id="res-table-id">TABLE 1</div>
                 <p class="table-location" id="res-table-loc">Plan de la salle</p>
                 
                 <div class="table-mates">
-                    <div class="table-mates-title">A votre table :</div>
+                    <div class="table-mates-title">À votre table</div>
                     <ul class="mates-list" id="res-mates-list"></ul>
                 </div>
 
@@ -449,7 +479,7 @@
 
             <!-- IMMUTABLE VECTORIAL INTERACTIVE MAP (SVG) -->
             <div class="map-view-container" id="map-container" style="display: none;">
-                <h3 style="font-size: 11pt; margin-bottom: 12px; font-weight: 400; text-align:center;">Plan de la salle de réception</h3>
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 16pt; margin-bottom: 12px; font-weight: 400; text-align:center; color: var(--dark-gray);">Plan de la salle de réception</h3>
                 <div class="map-wrapper">
                     <svg viewBox="0 0 700 380" id="floorplan-svg">
                         <!-- Murs extérieurs de la pièce -->
@@ -457,17 +487,17 @@
                         
                         <!-- Piste de danse centrale réalignée géométriquement -->
                         <ellipse cx="340" cy="190" rx="95" ry="40" fill="none" stroke="#d8c3a5" stroke-width="1.5" stroke-dasharray="4,4"/>
-                        <text x="340" y="190" font-family="serif" font-size="11px" fill="#d8c3a5" text-anchor="middle" font-style="italic">Piste de danse</text>
+                        <text x="340" y="190" font-family="'Cormorant Garamond', serif" font-size="13px" fill="#d8c3a5" text-anchor="middle" font-style="italic">Piste de danse</text>
                         
-                        <!-- Table des Mariés (à droite de l'ovale) -->
+                        <!-- Table des Mariés -->
                         <rect x="590" y="155" width="25" height="70" rx="4" fill="#faf8f4" stroke="#c5a059" stroke-width="1.5"/>
-                        <text x="602" y="190" font-family="serif" font-size="10px" fill="#c5a059" text-anchor="middle" transform="rotate(-90 602 190)">Maries</text>
+                        <text x="602" y="190" font-family="'Cormorant Garamond', serif" font-size="11px" fill="#c5a059" text-anchor="middle" transform="rotate(-90 602 190)">Mariés</text>
                         
                         <!-- Buffets (Jaunes) -->
                         <rect x="580" y="35" width="75" height="18" fill="#fef08a" stroke="#fde047" stroke-width="1"/>
-                        <text x="617" y="44" font-size="8px" fill="#666" text-anchor="middle">Buffet</text>
+                        <text x="617" y="46" font-size="8px" fill="#666" text-anchor="middle">Buffet</text>
                         <rect x="580" y="325" width="75" height="18" fill="#fef08a" stroke="#fde047" stroke-width="1"/>
-                        <text x="617" y="334" font-size="8px" fill="#666" text-anchor="middle">Buffet</text>
+                        <text x="617" y="336" font-size="8px" fill="#666" text-anchor="middle">Buffet</text>
 
                         <!-- Le script JS va injecter les ronds de tables ici -->
                         <g id="svg-tables-group"></g>
@@ -479,34 +509,35 @@
         <!-- FOOTER QUOTE -->
         <div class="quote-footer">
             "Tsy ny halavan'ny fiainana no zava-dehibe, fa ny halalin'ny fitiavana."
-            <div class="quote-heart">"Ce n'est pas la duree de la vie qui compte, mais la profondeur de l'amour."</div>
+            <div class="quote-heart">"Ce n'est pas la durée de la vie qui compte, mais la profondeur de l'amour."</div>
         </div>
 
         <!-- ADMIN PANEL -->
-        <div class="admin-link" onclick="checkAdminPassword()">Gestion de la liste (Organisateurs)</div>
+        <div class="admin-link" onclick="checkAdminPassword()">Espace Organisateur</div>
         
         <div class="admin-panel" id="admin-panel">
-            <h3 style="font-size: 12pt; margin-bottom: 10px; border-bottom: 1px solid var(--sand); padding-bottom: 6px;">Espace Organisateur</h3>
+            <h3 style="font-size: 11pt; margin-bottom: 10px; border-bottom: 1px solid var(--sand); padding-bottom: 6px; text-align: left;">Gestion des invités</h3>
             
             <div class="form-group">
-                <label>Nom de l'invite</label>
+                <label>Nom de l'invité</label>
                 <input type="text" id="admin-name" class="form-control" placeholder="Ex: Marie-Claude">
             </div>
             <div class="form-group">
                 <label>Table</label>
                 <input type="text" id="admin-table" class="form-control" placeholder="Ex: 14, Enfants 1, Prestataire">
             </div>
-            <button class="btn btn-secondary" style="margin-top: 5px; width: 100%;" onclick="addGuestFromAdmin()">Ajouter / Modifier</button>
+            <button class="btn btn-secondary" style="margin-top: 5px; width: 100%; border-radius: 8px;" onclick="addGuestFromAdmin()">Ajouter / Modifier</button>
 
             <div class="admin-list-container" id="admin-guests-list"></div>
             
-            <button class="btn btn-secondary" style="margin-top: 15px; font-size:8pt; width:100%; padding: 6px;" onclick="exportCurrentDatabase()">Copier la base de données brute</button>
-            <button class="btn btn-secondary" style="margin-top: 5px; font-size:8pt; width:100%; padding: 6px; background-color: #fee2e2; border-color: #fca5a5;" onclick="lockAdminPanel()">🔒 Déconnexion / Verrouiller</button>
+            <button class="btn btn-secondary" style="margin-top: 15px; font-size:8pt; width:100%; padding: 8px; border-radius: 8px;" onclick="exportCurrentDatabase()">Copier la base de données brute</button>
+            <button class="btn btn-secondary" style="margin-top: 5px; font-size:8pt; width:100%; padding: 8px; background-color: #fee2e2; border-color: #fca5a5; border-radius: 8px;" onclick="lockAdminPanel()">🔒 Déconnexion</button>
         </div>
 
     </div>
 
     <script>
+        // La liste complète par défaut synchronisée avec ton fichier
         const defaultGuests = [
           {"nom": "Arsène", "table": "1"}, {"nom": "Dina", "table": "1"}, {"nom": "Fidelice", "table": "1"}, {"nom": "Georgette", "table": "1"}, {"nom": "Hubert", "table": "1"}, {"nom": "Liva", "table": "1"}, {"nom": "Maman", "table": "1"}, {"nom": "Mbina", "table": "1"}, {"nom": "Papa", "table": "1"}, {"nom": "Fanja Deudon", "table": "1"},
           {"nom": "Alain", "table": "2"}, {"nom": "Bakoly", "table": "2"}, {"nom": "Cuy", "table": "2"}, {"nom": "José", "table": "2"}, {"nom": "Mamie", "table": "2"}, {"nom": "Natacha", "table": "2"}, {"nom": "Nirina", "table": "2"}, {"nom": "Tsanta", "table": "2"}, {"nom": "Ulyss", "table": "2"}, {"nom": "Natacha (Maman)", "table": "2"},
@@ -547,47 +578,12 @@
         let selectedGuestTable = "";
         let isAdminAuthenticated = false;
 
-        // RE-CALIBRAGE MILIEU GÉOMÉTRIQUE EXACT DE TOUTES LES TABLES (Fidèle au plan d'architecte)
+        // MILIEU GÉOMÉTRIQUE EXACT DE TOUTES LES TABLES (Fidèle au plan d'architecte)
         const tablePositions = {
-            // Ovale Intérieur - Ligne supérieure (De gauche à droite)
-            "19": {cx: 160, cy: 155},
-            "17": {cx: 200, cy: 165},
-            "15": {cx: 235, cy: 140},
-            "13": {cx: 270, cy: 155},
-            "11": {cx: 310, cy: 130},
-            "9":  {cx: 360, cy: 130},
-            "7":  {cx: 410, cy: 130},
-            "5":  {cx: 460, cy: 135},
-            "3":  {cx: 510, cy: 145},
-            "1":  {cx: 555, cy: 155},
-            
-            // Ovale Intérieur - Ligne inférieure (De gauche à droite)
-            "20": {cx: 155, cy: 225},
-            "18": {cx: 195, cy: 210},
-            "16": {cx: 230, cy: 235},
-            "14": {cx: 265, cy: 220},
-            "12": {cx: 305, cy: 245},
-            "10": {cx: 355, cy: 245},
-            "8":  {cx: 405, cy: 245},
-            "6":  {cx: 455, cy: 240},
-            "4":  {cx: 500, cy: 230},
-            "2":  {cx: 545, cy: 215},
-
-            // Rangée périphérique externe - Haut
-            "30": {cx: 255, cy: 75},
-            "29": {cx: 315, cy: 70},
-            "27": {cx: 395, cy: 70},
-            "25": {cx: 465, cy: 75},
-            "23": {cx: 520, cy: 85},
-            "21": {cx: 570, cy: 100},
-
-            // Rangée périphérique externe - Bas
-            "28": {cx: 185, cy: 285},
-            "26": {cx: 235, cy: 295},
-            "24": {cx: 430, cy: 295},
-            "22": {cx: 550, cy: 280},
-
-            // Tables bleues (Enfants) et Rouge (Prestataires)
+            "19": {cx: 160, cy: 155}, "17": {cx: 200, cy: 165}, "15": {cx: 235, cy: 140}, "13": {cx: 270, cy: 155}, "11": {cx: 310, cy: 130}, "9":  {cx: 360, cy: 130}, "7":  {cx: 410, cy: 130}, "5":  {cx: 460, cy: 135}, "3":  {cx: 510, cy: 145}, "1":  {cx: 555, cy: 155},
+            "20": {cx: 155, cy: 225}, "18": {cx: 195, cy: 210}, "16": {cx: 230, cy: 235}, "14": {cx: 265, cy: 220}, "12": {cx: 305, cy: 245}, "10": {cx: 355, cy: 245}, "8":  {cx: 405, cy: 245}, "6":  {cx: 455, cy: 240}, "4":  {cx: 500, cy: 230}, "2":  {cx: 545, cy: 215},
+            "30": {cx: 255, cy: 75},  "29": {cx: 315, cy: 70},  "27": {cx: 395, cy: 70},  "25": {cx: 465, cy: 75},  "23": {cx: 520, cy: 85},  "21": {cx: 570, cy: 100},
+            "28": {cx: 185, cy: 285}, "26": {cx: 235, cy: 295}, "24": {cx: 430, cy: 295}, "22": {cx: 550, cy: 280},
             "enfants 1":  {cx: 485, cy: 295, type: "kids", label: "E1"},
             "enfants 2":  {cx: 165, cy: 65,  type: "kids", label: "E2"},
             "enfants 3":  {cx: 130, cy: 95,  type: "kids", label: "E3"},
@@ -634,10 +630,10 @@
 
         function showResult(guest) {
             selectedGuestTable = guest.table;
-            document.getElementById('res-guest-name').innerText = `Bienvenue ${guest.nom}`;
+            document.getElementById('res-guest-name').innerText = `Félicitations ${guest.nom}`;
             document.getElementById('res-table-id').innerText = isNaN(guest.table) ? `${guest.table.toUpperCase()}` : `TABLE ${guest.table}`;
             
-            let positionDesc = "Plan de table d'ensemble";
+            let positionDesc = "Plan de la salle";
             const tableNum = parseInt(guest.table);
             if (!isNaN(tableNum)) {
                 if ([1, 2, 3, 4, 5, 6].includes(tableNum)) positionDesc = "Proche de la table d'honneur des mariés";
@@ -648,10 +644,8 @@
                 positionDesc = "Table des prestataires (côté DJ en bas)";
             } else if (guest.table.toLowerCase().includes('1')) {
                 positionDesc = "Espace enfants 1 (bas de salle)";
-            } else if (guest.table.toLowerCase().includes('2')) {
-                positionDesc = "Espace enfants 2 (haut gauche de salle)";
             } else {
-                positionDesc = "Espace enfants (haut gauche)";
+                positionDesc = "Espace enfants 2 (haut gauche de salle)";
             }
             document.getElementById('res-table-loc').innerText = positionDesc;
 
@@ -665,7 +659,7 @@
                     listEl.appendChild(li);
                 });
             } else {
-                listEl.innerHTML = '<li style="color:var(--light-gray); font-size:10pt;">Seul a cette table</li>';
+                listEl.innerHTML = '<li style="color:var(--light-gray); font-size:10pt;">Seul à cette table</li>';
             }
 
             navigateTo('screen-result');
@@ -725,13 +719,13 @@
             }
 
             if (!isAdminAuthenticated) {
-                const pwd = prompt("Veuillez saisir le code d'accès organisateur :");
+                const pwd = prompt("Saisir le code d'accès organisateur :");
                 if (pwd === "1234") {
                     isAdminAuthenticated = true;
                     panel.classList.add('active');
                     renderAdminList();
                 } else if (pwd !== null) {
-                    alert("Code incorrect. Accès refusé.");
+                    alert("Code incorrect.");
                 }
             } else {
                 panel.classList.add('active');
@@ -742,7 +736,7 @@
         function lockAdminPanel() {
             isAdminAuthenticated = false;
             document.getElementById('admin-panel').classList.remove('active');
-            alert("Espace verrouillé avec succès.");
+            alert("Verrouillé.");
         }
 
         function renderAdminList() {
@@ -766,7 +760,7 @@
             const tableIn = document.getElementById('admin-table').value.trim();
 
             if (!nameIn || !tableIn) {
-                alert('Veuillez remplir le nom et la table.');
+                alert('Veuillez remplir les deux champs.');
                 return;
             }
 
@@ -780,7 +774,7 @@
             saveAndSync();
             document.getElementById('admin-name').value = '';
             document.getElementById('admin-table').value = '';
-            alert(`${nameIn} mis a jour a la table ${tableIn}.`);
+            alert(`Mis à jour.`);
         }
 
         function deleteGuest(name) {
@@ -799,7 +793,7 @@
         function exportCurrentDatabase() {
             const dataStr = JSON.stringify(guestsDatabase, null, 2);
             navigator.clipboard.writeText(dataStr).then(() => {
-                alert("Base copiee ! Vous pouvez la sauvegarder.");
+                alert("Base copiée !");
             });
         }
     </script>
