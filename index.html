@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mariage de Joannie & Nathan - Plan de Table</title>
+    <style>
+        :root {
+            --champagne: #D8C3A5;
+            --off-white: #FAF8F4;
+            --sand: #E8DDCF;
+            --gold: #C5A059;
+            --dark-gray: #333333;
+            --light-gray: #888888;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Playfair Display', 'Didot', 'Georgia', serif;
+        }
+
+        body {
+            background-color: var(--off-white);
+            color: var(--dark-gray);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(216, 195, 165, 0.1) 1px, transparent 0);
+            background-size: 24px 24px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #screen-home {
+            justify-content: center;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .logo-monogram {
+            font-size: 48pt;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .names-title {
+            font-size: 26pt;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .welcome-text {
+            font-size: 13pt;
+            color: var(--light-gray);
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background-color: var(--champagne);
+            margin: 20px 0;
+        }
+
+        .btn {
+            background-color: var(--champagne);
+            color: var(--dark-gray);
+            border: 1px solid transparent;
+            padding: 14px 28px;
+            font-size: 12pt;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .btn:hover, .btn:active {
+            background-color: var(--sand);
+            border-color: var(--gold);
+        }
+
+        .btn-gold {
+            background-color: var(--gold);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--champagne);
+            color: var(--dark-gray);
+            padding: 8px 16px;
+            font-size: 10pt;
+        }
+
+        .search-box {
+            width: 100%;
+            position: relative;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 12pt;
+            border: 1px solid var(--champagne);
+            background-color: white;
+            border-radius: 8px;
+            outline: none;
+            color: var(--dark-gray);
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.1);
+        }
+
+        .suggestions-list {
+            list-style: none;
+            width: 100%;
+            background: white;
+            border: 1px solid var(--sand);
+            border-radius: 8px;
+            margin-top: 8px;
+            max-height: 240px;
+            overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .suggestion-item {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--off-white);
+            cursor: pointer;
+            font-size: 11pt;
+            text-align: left;
+            transition: background 0.2s;
+        }
+
+        .suggestion-item:hover, .suggestion-item:active {
+            background-color: var(--off-white);
+            color: var(--gold);
+        }
+
+        .result-card {
+            background: white;
+            border: 1px solid var(--sand);
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            margin-top: 20px;
+        }
+
+        .guest-welcome {
+            font-size: 16pt;
+            margin-bottom: 10px;
+        }
+
+        .table-number-box {
+            font-size: 32pt;
+            font-weight: bold;
+            color: var(--gold);
+            margin: 20px 0;
+            letter-spacing: 1px;
+        }
+
+        .table-location {
+            font-size: 11pt;
+            color: var(--light-gray);
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+
+        .table-mates {
+            text-align: left;
+            background: var(--off-white);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+        .table-mates-title {
+            font-size: 10pt;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--light-gray);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .mates-list {
+            font-size: 11pt;
+            line-height: 1.6;
+            list-style-type: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+        }
+
+        .map-view-container {
+            width: 100%;
+            background: #ffffff;
+            border: 1px solid var(--sand);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .map-svg-placeholder {
+            width: 100%;
+            height: auto;
+            background: #fdfdfd;
+            border: 1px dashed var(--champagne);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+
+        .table-grid-visual {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            width: 100%;
+        }
+
+        .table-dot {
+            aspect-ratio: 1;
+            background-color: var(--off-white);
+            border: 1px solid var(--champagne);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8pt;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            padding: 15%;
+        }
+
+        .table-dot.highlight {
+            background-color: var(--champagne);
+            border-color: var(--gold);
+            transform: scale(1.25);
+            box-shadow: 0 0 15px rgba(216, 195, 165, 0.8);
+            color: var(--dark-gray);
+        }
+
+        .table-dot.dimmed {
+            opacity: 0.25;
+        }
+
+        .quote-footer {
+            margin-top: auto;
+            padding: 40px 0 20px 0;
+            text-align: center;
+            font-size: 10pt;
+            color: var(--light-gray);
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .quote-heart {
+            color: var(--gold);
+            margin-top: 4px;
+        }
+
+        .admin-link {
+            font-size: 9pt;
+            color: var(--light-gray);
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 25px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .admin-panel {
+            display: none;
+            background: white;
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 9pt;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--champagne);
+            border-radius: 4px;
+            font-size: 10pt;
+        }
+
+        .guest-row-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--off-white);
+            font-size: 10pt;
+        }
+
+        .delete-btn {
+            color: #c0392b;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 11pt;
+        }
+
+        .admin-list-container {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 15px;
+            border-top: 1px solid var(--sand);
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div id="screen-home" class="screen active">
+            <div class="logo-monogram">ð¤</div>
+            <h1 class="names-title">Joannie & Nathan</h1>
+            <p class="welcome-text">Bienvenue Ã  notre mariage</p>
+            <div class="divider"></div>
+            <button class="btn" onclick="navigateTo('screen-search')">Trouver ma table ð¥</button>
+        </div>
+
+        <div id="screen-search" class="screen">
+            <button class="btn btn-secondary" style="align-self: flex-start; margin-top:0;" onclick="navigateTo('screen-home')">â Retour</button>
+            <h2 style="margin-top: 20px; font-weight: 400; letter-spacing: 1px;">OÃ¹ Ãªtes-vous placÃ© ?</h2>
+            
+            <div class="search-box">
+                <input type="text" id="search-input" class="search-input" placeholder="ð Rechercher votre prÃ©nom..." oninput="handleSearch(this.value)">
+                <ul id="suggestions-list" class="suggestions-list" style="display: none;"></ul>
+            </div>
+        </div>
+
+        <div id="screen-result" class="screen">
+            <button class="btn btn-secondary" style="align-self: flex-start; margin-top:0;" onclick="navigateTo('screen-search')">â Nouvelle recherche</button>
+            
+            <div class="result-card">
+                <h2 class="guest-welcome" id="res-guest-name">Bienvenue</h2>
+                <p style="font-size: 11pt; color: var(--light-gray);">Vous Ãªtes assignÃ© Ã  la</p>
+                <div class="table-number-box" id="res-table-id">TABLE 1</div>
+                <p class="table-location" id="res-table-loc">ð Centre de la salle de rÃ©ception</p>
+                
+                <div class="table-mates">
+                    <div class="table-mates-title">Ã votre table :</div>
+                    <ul class="mates-list" id="res-mates-list"></ul>
+                </div>
+
+                <button class="btn btn-gold" onclick="toggleMapMode()">ðºï¸ Voir sur le plan</button>
+            </div>
+
+            <div class="map-view-container" id="map-container" style="display: none;">
+                <h3 style="font-size: 11pt; margin-bottom: 10px; font-weight: 400;">Plan d'ensemble de la salle</h3>
+                <div class="map-svg-placeholder">
+                    <div class="table-grid-visual" id="table-visual-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-footer">
+            âTsy ny halavanâny fiainana no zava-dehibe, fa ny halalinâny fitiavana.â
+            <div class="quote-heart">âCe nâest pas la durÃ©e de la vie qui compte, mais la profondeur de lâamour.â â¤ï¸</div>
+        </div>
+
+        <div class="admin-link" onclick="toggleAdminPanel()">âï¸ Gestion de la liste (Organisateurs)</div>
+        
+        <div class="admin-panel" id="admin-panel">
+            <h3 style="font-size: 12pt; margin-bottom: 10px; border-bottom: 1px solid var(--sand); padding-bottom: 6px;">Gestion de la liste</h3>
+            
+            <div class="form-group">
+                <label>Nom de l'invitÃ©</label>
+                <input type="text" id="admin-name" class="form-control" placeholder="Ex: Marie-Claude">
+            </div>
+            <div class="form-group">
+                <label>Table</label>
+                <input type="text" id="admin-table" class="form-control" placeholder="Ex: 14, Enfants 1, Prestataire">
+            </div>
+            <button class="btn btn-secondary" style="margin-top: 5px; width: 100%;" onclick="addGuestFromAdmin()">â Ajouter / Modifier</button>
+
+            <div class="admin-list-container" id="admin-guests-list"></div>
+            
+            <button class="btn btn-secondary" style="margin-top: 15px; font-size:8pt; width:100%; padding: 6px;" onclick="exportCurrentDatabase()">ð¾ Copier la base de donnÃ©es brute</button>
+        </div>
+
+    </div>
+
+    <script>
+        const defaultGuests = [
+          {"nom": "ArsÃ¨ne", "table": "1"}, {"nom": "Dina", "table": "1"}, {"nom": "Fidelice", "table": "1"}, {"nom": "Georgette", "table": "1"}, {"nom": "Hubert", "table": "1"}, {"nom": "Liva", "table": "1"}, {"nom": "Maman", "table": "1"}, {"nom": "Mbina", "table": "1"}, {"nom": "Papa", "table": "1"}, {"nom": "Fanja Deudon", "table": "1"},
+          {"nom": "Alain", "table": "2"}, {"nom": "Bakoly", "table": "2"}, {"nom": "Cuy", "table": "2"}, {"nom": "JosÃ©", "table": "2"}, {"nom": "Mamie", "table": "2"}, {"nom": "Natacha", "table": "2"}, {"nom": "Nirina", "table": "2"}, {"nom": "Tsanta", "table": "2"}, {"nom": "Ulyss", "table": "2"}, {"nom": "Natacha (Maman)", "table": "2"},
+          {"nom": "Faly", "table": "3"}, {"nom": "Haja", "table": "3"}, {"nom": "Hery", "table": "3"}, {"nom": "Lalaina", "table": "3"}, {"nom": "Lanto", "table": "3"}, {"nom": "Malala", "table": "3"}, {"nom": "Noro", "table": "3"}, {"nom": "Sidonie", "table": "3"}, {"nom": "Vohirana", "table": "3"}, {"nom": "Vonjy", "table": "3"},
+          {"nom": "AgnÃ¨s", "table": "4"}, {"nom": "Buccela", "table": "4"}, {"nom": "Clara", "table": "4"}, {"nom": "Dominique", "table": "4"}, {"nom": "Florian", "table": "4"}, {"nom": "Giles", "table": "4"}, {"nom": "Houssem", "table": "4"}, {"nom": "Judith", "table": "4"}, {"nom": "Lionel", "table": "4"}, {"nom": "Sandra", "table": "4"},
+          {"nom": "Andry", "table": "5"}, {"nom": "Haja", "table": "5"}, {"nom": "Lalao", "table": "5"}, {"nom": "Laza", "table": "5"}, {"nom": "Mahatia", "table": "5"}, {"nom": "Mamihaja", "table": "5"}, {"nom": "Safidy", "table": "5"}, {"nom": "Sariaka", "table": "5"}, {"nom": "Tiavina", "table": "5"}, {"nom": "Vonjy", "table": "5"},
+          {"nom": "Hanitra", "table": "6"}, {"nom": "Jimmy", "table": "6"}, {"nom": "Laza", "table": "6"}, {"nom": "LoÃ¯s", "table": "6"}, {"nom": "Mamy", "table": "6"}, {"nom": "Masera", "table": "6"}, {"nom": "Mimi", "table": "6"}, {"nom": "Patrick", "table": "6"}, {"nom": "Ruffine", "table": "6"}, {"nom": "Steeven", "table": "6"},
+          {"nom": "AndrÃ©a", "table": "7"}, {"nom": "Gabby", "table": "7"}, {"nom": "Hoby", "table": "7"}, {"nom": "Hyacinthe", "table": "7"}, {"nom": "Parfait", "table": "7"}, {"nom": "Riana", "table": "7"}, {"nom": "Sambatra", "table": "7"}, {"nom": "Serge", "table": "7"}, {"nom": "Toky", "table": "7"}, {"nom": "Jean Yves", "table": "7"},
+          {"nom": "Albin", "table": "8"}, {"nom": "Arthene", "table": "8"}, {"nom": "Cedric", "table": "8"}, {"nom": "Claude", "table": "8"}, {"nom": "GisÃ¨le", "table": "8"}, {"nom": "J'offre", "table": "8"}, {"nom": "Mateo", "table": "8"}, {"nom": "Ninas", "table": "8"}, {"nom": "Olivia", "table": "8"}, {"nom": "Marie Pierre", "table": "8"},
+          {"nom": "Emmanuella", "table": "9"}, {"nom": "Lalaina", "table": "9"}, {"nom": "Marina", "table": "9"}, {"nom": "Miora", "table": "9"}, {"nom": "Nofy", "table": "9"}, {"nom": "Patrick", "table": "9"}, {"nom": "Sandrine", "table": "9"}, {"nom": "Ulrich", "table": "9"}, {"nom": "Wyatt", "table": "9"}, {"nom": "Nom Ã  confirmer ?", "table": "9"},
+          {"nom": "Clain", "table": "10"}, {"nom": "Cyslaine", "table": "10"}, {"nom": "Jeannie", "table": "10"}, {"nom": "Lucie", "table": "10"}, {"nom": "Marietta", "table": "10"}, {"nom": "Natacha", "table": "10"}, {"nom": "Nathalie", "table": "10"}, {"nom": "Noeline", "table": "10"}, {"nom": "Stephan", "table": "10"}, {"nom": "Zazah", "table": "10"},
+          {"nom": "Bonnat", "table": "11"}, {"nom": "David", "table": "11"}, {"nom": "Malanja", "table": "11"}, {"nom": "Mialy", "table": "11"}, {"nom": "Narisoa", "table": "11"}, {"nom": "Nary", "table": "11"}, {"nom": "Solo", "table": "11"}, {"nom": "Tadar", "table": "11"}, {"nom": "Tsito", "table": "11"}, {"nom": "Viviane", "table": "11"},
+          {"nom": "Ali", "table": "12"}, {"nom": "Axel", "table": "12"}, {"nom": "Brunette", "table": "12"}, {"nom": "Dylan", "table": "12"}, {"nom": "Jerry", "table": "12"}, {"nom": "Keting", "table": "12"}, {"nom": "Wendy", "table": "12"}, {"nom": "Williames", "table": "12"}, {"nom": "Yannick", "table": "12"}, {"nom": "Steeven Chan se", "table": "12"},
+          {"nom": "Ando", "table": "13"}, {"nom": "Andrianina", "table": "13"}, {"nom": "Coco", "table": "13"}, {"nom": "Fenitra", "table": "13"}, {"nom": "Lanto", "table": "13"}, {"nom": "Marinho", "table": "13"}, {"nom": "Melanie", "table": "13"}, {"nom": "Rico", "table": "13"}, {"nom": "Sidonie", "table": "13"}, {"nom": "Tsihoarana", "table": "13"},
+          {"nom": "Dylan", "table": "14"}, {"nom": "Halima", "table": "14"}, {"nom": "Jamila", "table": "14"}, {"nom": "Janelle", "table": "14"}, {"nom": "Jemima", "table": "14"}, {"nom": "Leah", "table": "14"}, {"nom": "Meech", "table": "14"}, {"nom": "Samia", "table": "14"}, {"nom": "Shandy", "table": "14"}, {"nom": "Yanis", "table": "14"},
+          {"nom": "Christina", "table": "15"}, {"nom": "Felana", "table": "15"}, {"nom": "GrÃ©goire", "table": "15"}, {"nom": "Haritiana", "table": "15"}, {"nom": "Kayden", "table": "15"}, {"nom": "Koloina", "table": "15"}, {"nom": "Princia", "table": "15"}, {"nom": "Sandrina", "table": "15"}, {"nom": "Saphira", "table": "15"}, {"nom": "Vanyah", "table": "15"},
+          {"nom": "Aaron", "table": "16"}, {"nom": "Andry", "table": "16"}, {"nom": "Brandy", "table": "16"}, {"nom": "Fanny", "table": "16"}, {"nom": "Ines", "table": "16"}, {"nom": "Irinatiavina", "table": "16"}, {"nom": "Jason", "table": "16"}, {"nom": "Jonathan", "table": "16"}, {"nom": "Kevin", "table": "16"}, {"nom": "KV1", "table": "16"},
+          {"nom": "AndrÃ©a", "table": "17"}, {"nom": "Caleb", "table": "17"}, {"nom": "CÃ©cilia", "table": "17"}, {"nom": "Driiko", "table": "17"}, {"nom": "InÃ¨s", "table": "17"}, {"nom": "Kloe", "table": "17"}, {"nom": "Nyavo", "table": "17"}, {"nom": "Sofia", "table": "17"}, {"nom": "Victoria", "table": "17"}, {"nom": "Wincy", "table": "17"},
+          {"nom": "Brice", "table": "18"}, {"nom": "David", "table": "18"}, {"nom": "Ezechias", "table": "18"}, {"nom": "Gabriel", "table": "18"}, {"nom": "Cracidi", "table": "18"}, {"nom": "Hans", "table": "18"}, {"nom": "Louise", "table": "18"}, {"nom": "Marvin", "table": "18"}, {"nom": "Samuel", "table": "18"}, {"nom": "Sitraka", "table": "18"},
+          {"nom": "Amy", "table": "19"}, {"nom": "Bryanne", "table": "19"}, {"nom": "Johan", "table": "19"}, {"nom": "Manuella", "table": "19"}, {"nom": "Morgane", "table": "19"}, {"nom": "Ryan", "table": "19"}, {"nom": "Yoni", "table": "19"}, {"nom": "Mehdi Hadri", "table": "19"}, {"nom": "Marie Laure", "table": "19"},
+          {"nom": "Bassekou", "table": "20"}, {"nom": "Beny", "table": "20"}, {"nom": "Chrisly", "table": "20"}, {"nom": "Christopher", "table": "20"}, {"nom": "Joakim", "table": "20"}, {"nom": "Joyce", "table": "20"}, {"nom": "Noah", "table": "20"}, {"nom": "Riyas", "table": "20"}, {"nom": "Romeo", "table": "20"}, {"nom": "Yves-Romain", "table": "20"},
+          {"nom": "Angel", "table": "21"}, {"nom": "Dylan", "table": "21"}, {"nom": "Fidina", "table": "21"}, {"nom": "Jimmy", "table": "21"}, {"nom": "Jonathan", "table": "21"}, {"nom": "Mathieu", "table": "21"}, {"nom": "Natha", "table": "21"}, {"nom": "Patrick", "table": "21"}, {"nom": "Safidy", "table": "21"}, {"nom": "Toavina", "table": "21"},
+          {"nom": "Adrien", "table": "22"}, {"nom": "Alan", "table": "22"}, {"nom": "Amelie", "table": "22"}, {"nom": "Ando", "table": "22"}, {"nom": "Axel", "table": "22"}, {"nom": "Coralie", "table": "22"}, {"nom": "Cael", "table": "22"}, {"nom": "Kenzo", "table": "22"}, {"nom": "Misa", "table": "22"}, {"nom": "Sergia", "table": "22"},
+          {"nom": "AndrÃ©a", "table": "23"}, {"nom": "Estelle", "table": "23"}, {"nom": "Manitra", "table": "23"}, {"nom": "Patricia", "table": "23"}, {"nom": "Philia", "table": "23"}, {"nom": "RaphaÃ«l", "table": "23"}, {"nom": "Steffy", "table": "23"}, {"nom": "Tiahy", "table": "23"}, {"nom": "Valentina", "table": "23"}, {"nom": "YnaÃ¯sse", "table": "23"},
+          {"nom": "Chloe", "table": "24"}, {"nom": "Esra", "table": "24"}, {"nom": "Falya", "table": "24"}, {"nom": "Hary", "table": "24"}, {"nom": "Hasina", "table": "24"}, {"nom": "Maia", "table": "24"}, {"nom": "Marine", "table": "24"}, {"nom": "Melina", "table": "24"}, {"nom": "Shariane", "table": "24"}, {"nom": "Tsikinia", "table": "24"},
+          {"nom": "Aina", "table": "25"}, {"nom": "AnaÃ¯s", "table": "25"}, {"nom": "Catalina", "table": "25"}, {"nom": "Elysa", "table": "25"}, {"nom": "Gabby", "table": "25"}, {"nom": "Jade", "table": "25"}, {"nom": "Laura", "table": "25"}, {"nom": "Merliah", "table": "25"}, {"nom": "Sandrian", "table": "25"}, {"nom": "Lana rose", "table": "25"},
+          {"nom": "Austin", "table": "26"}, {"nom": "Bien-AimÃ©", "table": "26"}, {"nom": "Claydis", "table": "26"}, {"nom": "Cleo", "table": "26"}, {"nom": "Lucas", "table": "26"}, {"nom": "Marvin", "table": "26"}, {"nom": "Mathias", "table": "26"}, {"nom": "Mickael", "table": "26"}, {"nom": "Mondy", "table": "26"}, {"nom": "Pamela", "table": "26"},
+          {"nom": "AÃ¯my", "table": "27"}, {"nom": "Joseph", "table": "27"}, {"nom": "Mamad", "table": "27"}, {"nom": "Mareva", "table": "27"}, {"nom": "MaÃ«ly", "table": "27"}, {"nom": "Miora", "table": "27"}, {"nom": "SalomÃ©", "table": "27"}, {"nom": "Steffy", "table": "27"}, {"nom": "Tiphaine", "table": "27"}, {"nom": "Toky", "table": "27"},
+          {"nom": "Anna", "table": "28"}, {"nom": "Chiara", "table": "28"}, {"nom": "Cyrano", "table": "28"}, {"nom": "Ilonna", "table": "28"}, {"nom": "Jade", "table": "28"}, {"nom": "Jody", "table": "28"}, {"nom": "Melissa", "table": "28"}, {"nom": "Tinah", "table": "28"}, {"nom": "Tiphanie", "table": "28"}, {"nom": "Chiara Napoke", "table": "28"},
+          {"nom": "Antoine", "table": "29"}, {"nom": "Edonio", "table": "29"}, {"nom": "Fitia", "table": "29"}, {"nom": "Gabriel", "table": "29"}, {"nom": "HÃ©loÃ¯se", "table": "29"}, {"nom": "Illona", "table": "29"}, {"nom": "Jordan", "table": "29"}, {"nom": "Katherine", "table": "29"}, {"nom": "Sidy", "table": "29"},
+          {"nom": "Arifenitra", "table": "30"}, {"nom": "Cedric", "table": "30"}, {"nom": "Hanta", "table": "30"}, {"nom": "Jessica", "table": "30"}, {"nom": "Lucien", "table": "30"}, {"nom": "Maya", "table": "30"}, {"nom": "Michele", "table": "30"}, {"nom": "Onja", "table": "30"}, {"nom": "Tatiana", "table": "30"},
+          {"nom": "Aaron", "table": "Enfants 1"}, {"nom": "Alexandre", "table": "Enfants 1"}, {"nom": "Flora", "table": "Enfants 1"}, {"nom": "Ilenna", "table": "Enfants 1"}, {"nom": "Maelyne", "table": "Enfants 1"}, {"nom": "Maelys", "table": "Enfants 1"}, {"nom": "Maharo", "table": "Enfants 1"}, {"nom": "Sandy", "table": "Enfants 1"}, {"nom": "Soumaia", "table": "Enfants 1"}, {"nom": "Tsiory", "table": "Enfants 1"},
+          {"nom": "Abby", "table": "Enfants 2"}, {"nom": "Alek", "table": "Enfants 2"}, {"nom": "ChloÃ©", "table": "Enfants 2"}, {"nom": "Christelle", "table": "Enfants 2"}, {"nom": "David", "table": "Enfants 2"}, {"nom": "Elena", "table": "Enfants 2"}, {"nom": "GrÃ¢ce", "table": "Enfants 2"}, {"nom": "Inayah", "table": "Enfants 2"}, {"nom": "Jared", "table": "Enfants 2"}, {"nom": "Joy", "table": "Enfants 2"}, {"nom": "Kim", "table": "Enfants 2"}, {"nom": "Lova", "table": "Enfants 2"}, {"nom": "Lyam", "table": "Enfants 2"}, {"nom": "Malaza", "table": "Enfants 2"}, {"nom": "Miantsa", "table": "Enfants 2"}, {"nom": "Noa", "table": "Enfants 2"}, {"nom": "Rudy", "table": "Enfants 2"}, {"nom": "Shirley", "table": "Enfants 2"}, {"nom": "Xavier", "table": "Enfants 2"}, {"nom": "Yvan", "table": "Enfants 2"}, {"nom": "Ny Afaliana", "table": "Enfants 2"},
+          {"nom": "Tithy", "table": "Prestataire"}, {"nom": "Tixfy", "table": "Prestataire"}, {"nom": "Videaste", "table": "Prestataire"}, {"nom": "Photographe", "table": "Prestataire"}
+        ];
+
+        let guestsDatabase = JSON.parse(localStorage.getItem('wedding_guests_db')) || defaultGuests;
+        let selectedGuestTable = "";
+
+        function navigateTo(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            if(screenId === 'screen-search') {
+                document.getElementById('search-input').value = '';
+                document.getElementById('suggestions-list').style.display = 'none';
+                document.getElementById('map-container').style.display = 'none';
+            }
+        }
+
+        function handleSearch(val) {
+            const listContainer = document.getElementById('suggestions-list');
+            if (!val.trim() || val.length < 2) {
+                listContainer.style.display = 'none';
+                return;
+            }
+
+            const cleanVal = val.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const filtered = guestsDatabase.filter(g => {
+                const cleanName = g.nom.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                return cleanName.includes(cleanVal);
+            });
+
+            listContainer.innerHTML = '';
+            if (filtered.length > 0) {
+                filtered.forEach(g => {
+                    const li = document.createElement('li');
+                    li.className = 'suggestion-item';
+                    li.innerHTML = `<strong>${g.nom}</strong> <span style="color:var(--light-gray); font-size:9pt; float:right;">Table ${g.table}</span>`;
+                    li.onclick = () => showResult(g);
+                    listContainer.appendChild(li);
+                });
+                listContainer.style.display = 'block';
+            } else {
+                listContainer.style.display = 'none';
+            }
+        }
+
+        function showResult(guest) {
+            selectedGuestTable = guest.table;
+            document.getElementById('res-guest-name').innerText = `Bienvenue ${guest.nom} â¨`;
+            document.getElementById('res-table-id').innerText = isNaN(guest.table) ? `${guest.table.toUpperCase()}` : `TABLE ${guest.table}`;
+            
+            let positionDesc = "ð Centre de la salle de rÃ©ception";
+            const tableNum = parseInt(guest.table);
+            if (!isNaN(tableNum)) {
+                if ([8, 10, 12, 24].includes(tableNum)) positionDesc = "ð PrÃ¨s du DJ et de la piste";
+                else if (tableNum <= 6) positionDesc = "ð RangÃ©e latÃ©rale gauche";
+                else if (tableNum > 24) positionDesc = "ð RangÃ©e latÃ©rale droite";
+            } else if (guest.table.toLowerCase().includes('prestataire')) {
+                positionDesc = "ð Espace prestataires";
+            } else {
+                positionDesc = "ð Espace d'honneur enfants";
+            }
+            document.getElementById('res-table-loc').innerText = positionDesc;
+
+            const mates = guestsDatabase.filter(g => g.table === guest.table && g.nom !== guest.nom);
+            const listEl = document.getElementById('res-mates-list');
+            listEl.innerHTML = '';
+            if (mates.length > 0) {
+                mates.forEach(m => {
+                    const li = document.createElement('li');
+                    li.innerText = `â¢ ${m.nom}`;
+                    listEl.appendChild(li);
+                });
+            } else {
+                listEl.innerHTML = '<li style="color:var(--light-gray); font-size:10pt;">Seul Ã  cette table</li>';
+            }
+
+            navigateTo('screen-result');
+        }
+
+        function toggleMapMode() {
+            const container = document.getElementById('map-container');
+            const grid = document.getElementById('table-visual-grid');
+            grid.innerHTML = '';
+
+            if (container.style.display === 'none') {
+                container.style.display = 'block';
+                
+                for (let i = 1; i <= 32; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'table-dot';
+                    let label = i;
+                    let matchKey = i.toString();
+
+                    if (i === 31) { label = "E1"; matchKey = "enfants 1"; }
+                    if (i === 32) { label = "E2"; matchKey = "enfants 2"; }
+
+                    dot.innerText = label;
+
+                    if (selectedGuestTable.toLowerCase() === matchKey) {
+                        dot.className = 'table-dot highlight';
+                    } else if (selectedGuestTable !== "") {
+                        dot.className = 'table-dot dimmed';
+                    }
+                    grid.appendChild(dot);
+                }
+            } else {
+                container.style.display = 'none';
+            }
+        }
+
+        function toggleAdminPanel() {
+            const panel = document.getElementById('admin-panel');
+            panel.classList.toggle('active');
+            if (panel.classList.contains('active')) {
+                renderAdminList();
+            }
+        }
+
+        function renderAdminList() {
+            const container = document.getElementById('admin-guests-list');
+            container.innerHTML = '';
+            const sorted = [...guestsDatabase].sort((a,b) => a.nom.localeCompare(b.nom));
+            sorted.forEach(g => {
+                const row = document.createElement('div');
+                row.className = 'guest-row-item';
+                row.innerHTML = `
+                    <span><strong>${g.nom}</strong> (Table ${g.table})</span>
+                    <button class="delete-btn" onclick="deleteGuest('${g.nom}')">ðï¸</button>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function addGuestFromAdmin() {
+            const nameIn = document.getElementById('admin-name').value.trim();
+            const tableIn = document.getElementById('admin-table').value.trim();
+
+            if (!nameIn || !tableIn) {
+                alert('Veuillez remplir le nom et la table.');
+                return;
+            }
+
+            const existingIdx = guestsDatabase.findIndex(g => g.nom.toLowerCase() === nameIn.toLowerCase());
+            if (existingIdx > -1) {
+                guestsDatabase[existingIdx].table = tableIn;
+            } else {
+                guestsDatabase.push({ nom: nameIn, table: tableIn });
+            }
+
+            saveAndSync();
+            document.getElementById('admin-name').value = '';
+            document.getElementById('admin-table').value = '';
+            alert(`${nameIn} mis Ã  jour Ã  la table ${tableIn}.`);
+        }
+
+        function deleteGuest(name) {
+            if(confirm(`Supprimer ${name} ?`)) {
+                guestsDatabase = guestsDatabase.filter(g => g.nom !== name);
+                saveAndSync();
+            }
+        }
+
+        function saveAndSync() {
+            localStorage.setItem('wedding_guests_db', JSON.stringify(guestsDatabase));
+            renderAdminList();
+        }
+
+        function exportCurrentDatabase() {
+            const dataStr = JSON.stringify(guestsDatabase, null, 2);
+            navigator.clipboard.writeText(dataStr).then(() => {
+                alert("Base copiÃ©e ! Vous pouvez la sauvegarder dans un fichier texte.");
+            });
+        }
+    </script>
+</body>
+</html>
