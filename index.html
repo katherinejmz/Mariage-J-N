@@ -249,113 +249,75 @@
             gap: 4px;
         }
 
-        /* CONFIGURATION DU REALISTIC MAP ROOM */
+        /* MAP CONFIGURATION (RESPONSIVE SVG CANVAS) */
         .map-view-container {
             width: 100%;
             background: #ffffff;
             border: 1px solid var(--sand);
             border-radius: 12px;
-            padding: 14px;
+            padding: 16px;
             margin-top: 20px;
-            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
 
-        .room-blueprint {
+        .map-wrapper {
             position: relative;
             width: 100%;
-            height: 280px; /* Ratio ajusté pour mobile */
-            background-color: #fdfdfd;
+            background: #fafaf8;
             border: 1px solid var(--champagne);
-            border-radius: 8px;
-            margin-top: 10px;
-            overflow: hidden;
+            border-radius: 6px;
+            padding: 5px;
         }
 
-        /* Éléments de la salle */
-        .room-element {
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 7pt;
-            text-align: center;
-            color: var(--light-gray);
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
-        .dance-floor-visual {
-            position: absolute;
-            top: 38%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100px;
-            height: 50px;
-            border: 1px dashed var(--champagne);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8pt;
-            color: var(--champagne);
-            font-style: italic;
+        /* SVG Table states styles */
+        .svg-table {
+            fill: #ffffff;
+            stroke: #333333;
+            stroke-width: 1.2px;
+            transition: all 0.3s ease;
         }
 
-        .wedding-table-visual {
-            right: 8px;
-            top: 33%;
-            width: 32px;
-            height: 45px;
-            border: 1px solid var(--gold);
-            background: var(--off-white);
-            border-radius: 4px;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            font-size: 7pt;
-            color: var(--gold);
-        }
-
-        .buffet-visual-1 { top: 6px; right: 35px; width: 50px; height: 10px; background: #fef08a; border: 1px solid #fde047; }
-        .buffet-visual-2 { bottom: 6px; right: 35px; width: 45px; height: 10px; background: #fef08a; border: 1px solid #fde047; }
-
-        /* Style des cercles de tables */
-        .table-dot {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            background-color: white;
-            border: 1px solid var(--dark-gray);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 7.5pt;
+        .svg-text {
+            font-family: sans-serif;
             font-weight: bold;
-            transition: all 0.4s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 11px;
+            fill: #333333;
+            text-anchor: middle;
+            dominant-baseline: central;
+            pointer-events: none;
         }
 
-        .table-dot.kids {
-            border-color: #06b6d4; /* Bleu turquoise du plan */
-            color: #0891b2;
+        /* Styles spéciaux des types de cercles */
+        .svg-table.kids { stroke: #00b4d8; stroke-width: 1.5px; }
+        .svg-table.kids + text { fill: #0077b6; }
+
+        .svg-table.pro { stroke: #ef4444; stroke-width: 1.5px; }
+        .svg-table.pro + text { fill: #b91c1c; }
+
+        /* États d'interactions */
+        .svg-table.highlight {
+            fill: #d8c3a5 !important;
+            stroke: #c5a059 !important;
+            stroke-width: 3px !important;
+            filter: drop-shadow(0px 0px 6px rgba(197, 160, 89, 0.7));
+        }
+        .svg-table.highlight + text {
+            fill: #333333 !important;
+            font-size: 13px !important;
         }
 
-        .table-dot.pro {
-            border-color: #ef4444; /* Rouge du plan */
-            color: #dc2626;
+        .svg-table.dimmed {
+            opacity: 0.15;
+            stroke: #bbbbbb;
         }
-
-        /* Animations d'états dynamiques */
-        .table-dot.highlight {
-            background-color: #d8c3a5 !important;
-            border-color: var(--gold) !important;
-            color: var(--dark-gray) !important;
-            transform: scale(1.4);
-            box-shadow: 0 0 12px rgba(197, 160, 89, 0.8);
-            z-index: 10;
-        }
-
-        .table-dot.dimmed {
-            opacity: 0.2;
-            border-color: #ccc;
+        .svg-table.dimmed + text {
+            opacity: 0.15;
         }
 
         .quote-footer {
@@ -475,7 +437,7 @@
                 <h2 class="guest-welcome" id="res-guest-name">Bienvenue</h2>
                 <p style="font-size: 11pt; color: var(--light-gray);">Vous etes assigne a la</p>
                 <div class="table-number-box" id="res-table-id">TABLE 1</div>
-                <p class="table-location" id="res-table-loc">Plan d'ensemble</p>
+                <p class="table-location" id="res-table-loc">Plan de la salle</p>
                 
                 <div class="table-mates">
                     <div class="table-mates-title">A votre table :</div>
@@ -485,18 +447,31 @@
                 <button class="btn btn-gold" onclick="toggleMapMode()">Voir sur le plan</button>
             </div>
 
-            <!-- INTERACTIVE REALISTIC PLAN -->
+            <!-- IMMUTABLE VECTORIAL INTERACTIVE MAP (SVG) -->
             <div class="map-view-container" id="map-container" style="display: none;">
-                <h3 style="font-size: 11pt; margin-bottom: 4px; font-weight: 400;">Plan d'ensemble de la salle</h3>
-                
-                <div class="room-blueprint" id="blueprint-container">
-                    <!-- Éléments structurels fixes -->
-                    <div class="dance-floor-visual">Piste de danse</div>
-                    <div class="room-element wedding-table-visual">Mariés</div>
-                    <div class="room-element buffet-visual-1"></div>
-                    <div class="room-element buffet-visual-2"></div>
-                    
-                    <!-- Les tables générées dynamiquement par le JS se placeront ici -->
+                <h3 style="font-size: 11pt; margin-bottom: 12px; font-weight: 400; text-align:center;">Plan de la salle de réception</h3>
+                <div class="map-wrapper">
+                    <svg viewBox="0 0 700 380" id="floorplan-svg">
+                        <!-- Murs extérieurs de la pièce -->
+                        <rect x="15" y="15" width="670" height="350" fill="none" stroke="#d8c3a5" stroke-width="2"/>
+                        
+                        <!-- Piste de danse centrale -->
+                        <ellipse cx="330" cy="190" rx="65" ry="35" fill="none" stroke="#d8c3a5" stroke-width="1.5" stroke-dasharray="4,4"/>
+                        <text x="330" y="190" font-family="serif" font-size="11px" fill="#d8c3a5" text-anchor="middle" font-style="italic">Piste de danse</text>
+                        
+                        <!-- Table des Mariés (à droite de l'ovale) -->
+                        <rect x="525" y="160" width="25" height="60" rx="4" fill="#faf8f4" stroke="#c5a059" stroke-width="1.5"/>
+                        <text x="537" y="190" font-family="serif" font-size="10px" fill="#c5a059" text-anchor="middle" transform="rotate(-90 537 190)">Maries</text>
+                        
+                        <!-- Buffets (Jaunes) -->
+                        <rect x="580" y="25" width="65" height="15" fill="#fef08a" stroke="#fde047" stroke-width="1"/>
+                        <text x="612" y="33" font-size="8px" fill="#888" text-anchor="middle">Buffet</text>
+                        <rect x="580" y="340" width="65" height="15" fill="#fef08a" stroke="#fde047" stroke-width="1"/>
+                        <text x="612" y="348" font-size="8px" fill="#888" text-anchor="middle">Buffet</text>
+
+                        <!-- Le script JS va injecter les ronds de tables ici de manière statique et sécurisée -->
+                        <g id="svg-tables-group"></g>
+                    </svg>
                 </div>
             </div>
         </div>
@@ -547,7 +522,7 @@
           {"nom": "Ali", "table": "12"}, {"nom": "Axel", "table": "12"}, {"nom": "Brunette", "table": "12"}, {"nom": "Dylan", "table": "12"}, {"nom": "Jerry", "table": "12"}, {"nom": "Keting", "table": "12"}, {"nom": "Wendy", "table": "12"}, {"nom": "Williames", "table": "12"}, {"nom": "Yannick", "table": "12"}, {"nom": "Steeven Chan se", "table": "12"},
           {"nom": "Ando", "table": "13"}, {"nom": "Andrianina", "table": "13"}, {"nom": "Coco", "table": "13"}, {"nom": "Fenitra", "table": "13"}, {"nom": "Lanto", "table": "13"}, {"nom": "Marinho", "table": "13"}, {"nom": "Melanie", "table": "13"}, {"nom": "Rico", "table": "13"}, {"nom": "Sidonie", "table": "13"}, {"nom": "Tsihoarana", "table": "13"},
           {"nom": "Dylan", "table": "14"}, {"nom": "Halima", "table": "14"}, {"nom": "Jamila", "table": "14"}, {"nom": "Janelle", "table": "14"}, {"nom": "Jemima", "table": "14"}, {"nom": "Leah", "table": "14"}, {"nom": "Meech", "table": "14"}, {"nom": "Samia", "table": "14"}, {"nom": "Shandy", "table": "14"}, {"nom": "Yanis", "table": "14"},
-          {"nom": "Christina", "table": "15"}, {"nom": "Felana", "table": "15"}, {"nom": "Grégoire", "table": "15"}, {"nom": "Haritiana", "table": "15"}, {"nom": "Kayden", "table": "15"}, {"nom": "Koloina", "table": "15"}, {"nom": "Princia", "table": "15"}, {"nom": "Sandrina", "table": "15"}, {"nom": "Saphira", "table": "15"}, {"nom": "Vanyah", "table": "15"},
+          {"nom": "Christina", "table": "15"}, {"nom": "Felana", "table": "15"}, {"nom": "Grégoire", "table": "15"}, {"nom": "Haritiana", "table": "15"}, {"nom": "Kayden", "table": "15"}, {"nom": "Koloina", "table": "15"}, {"nom": "Princia", "span>": "15"}, {"nom": "Sandrina", "table": "15"}, {"nom": "Saphira", "table": "15"}, {"nom": "Vanyah", "table": "15"},
           {"nom": "Aaron", "table": "16"}, {"nom": "Andry", "table": "16"}, {"nom": "Brandy", "table": "16"}, {"nom": "Fanny", "table": "16"}, {"nom": "Ines", "table": "16"}, {"nom": "Irinatiavina", "table": "16"}, {"nom": "Jason", "table": "16"}, {"nom": "Jonathan", "table": "16"}, {"nom": "Kevin", "table": "16"}, {"nom": "KV1", "table": "16"},
           {"nom": "Andréa", "table": "17"}, {"nom": "Caleb", "table": "17"}, {"nom": "Cécilia", "table": "17"}, {"nom": "Driiko", "table": "17"}, {"nom": "Inès", "table": "17"}, {"nom": "Kloe", "table": "17"}, {"nom": "Nyavo", "table": "17"}, {"nom": "Sofia", "table": "17"}, {"nom": "Victoria", "table": "17"}, {"nom": "Wincy", "table": "17"},
           {"nom": "Brice", "table": "18"}, {"nom": "David", "table": "18"}, {"nom": "Ezechias", "table": "18"}, {"nom": "Gabriel", "table": "18"}, {"nom": "Cracidi", "table": "18"}, {"nom": "Hans", "table": "18"}, {"nom": "Louise", "table": "18"}, {"nom": "Marvin", "table": "18"}, {"nom": "Samuel", "table": "18"}, {"nom": "Sitraka", "table": "18"},
@@ -572,31 +547,53 @@
         let selectedGuestTable = "";
         let isAdminAuthenticated = false;
 
-        // COORDONNÉES EXACTES DES TABLES BASEES SUR LE PLAN D'ARCHITECTE (Pourcentages X, Y)
+        // COORDONNÉES EN CODES PIXELS (Stables dans le viewBox SVG 700x380)
         const tablePositions = {
-            // Cercle intérieur haut (de droite à gauche)
-            "1": {x: 72, y: 30}, "3": {x: 64, y: 28}, "5": {x: 57, y: 27}, "7": {x: 50, y: 26}, 
-            "9": {x: 43, y: 27}, "11": {x: 36, y: 29}, "13": {x: 33, y: 35}, "15": {x: 30, y: 31},
+            // Ovale Intérieur - Ligne du haut (de droite à gauche)
+            "1":  {cx: 485, cy: 115},
+            "3":  {cx: 445, cy: 105},
+            "5":  {cx: 400, cy: 100},
+            "7":  {cx: 355, cy: 100},
+            "9":  {cx: 310, cy: 100},
+            "11": {cx: 265, cy: 105},
+            "13": {cx: 240, cy: 125},
+            "15": {cx: 215, cy: 110},
             
-            // Cercle intérieur bas (de droite à gauche)
-            "2": {x: 68, y: 55}, "4": {x: 61, y: 56}, "6": {x: 55, y: 57}, "8": {x: 49, y: 58}, 
-            "10": {x: 42, y: 58}, "12": {x: 36, y: 57}, "14": {x: 33, y: 52}, "16": {x: 29, y: 54},
+            // Ovale Intérieur - Ligne du bas (de droite à gauche)
+            "2":  {cx: 475, cy: 200},
+            "4":  {cx: 435, cy: 210},
+            "6":  {cx: 395, cy: 215},
+            "8":  {cx: 350, cy: 215},
+            "10": {cx: 305, cy: 215},
+            "12": {cx: 260, cy: 210},
+            "14": {cx: 235, cy: 190},
+            "16": {cx: 210, cy: 210},
             
             // Fond gauche ovale intérieur
-            "17": {x: 26, y: 36}, "18": {x: 26, y: 49}, "19": {x: 22, y: 34}, "20": {x: 22, y: 52},
+            "17": {cx: 190, cy: 135},
+            "18": {cx: 185, cy: 185},
+            "19": {cx: 160, cy: 125},
+            "20": {cx: 155, cy: 195},
 
             // Ligne périphérique extérieure haute
-            "21": {x: 74, y: 13}, "23": {x: 67, y: 11}, "25": {x: 60, y: 10}, "27": {x: 52, y: 10}, 
-            "29": {x: 41, y: 10}, "30": {x: 34, y: 11},
+            "21": {cx: 520, cy: 45},
+            "23": {cx: 470, cy: 40},
+            "25": {cx: 425, cy: 38},
+            "27": {cx: 370, cy: 35},
+            "29": {cx: 295, cy: 35},
+            "30": {cx: 250, cy: 42},
 
             // Ligne périphérique extérieure basse
-            "22": {x: 72, y: 72}, "24": {x: 58, y: 72}, "26": {x: 32, y: 72}, "28": {x: 26, y: 72},
+            "22": {cx: 510, cy: 235},
+            "24": {cx: 410, cy: 235},
+            "26": {cx: 235, cy: 240},
+            "28": {cx: 190, cy: 235},
 
-            // Zones spécifiques (enfants, prestataires)
-            "enfants 1": {x: 64, y: 72, type: "kids", label: "E1"},
-            "enfants 2": {x: 23, y: 8},  type: "kids", label: "E2", // Table 2 bleue haut gauche
-            "enfants 3": {x: 18, y: 18}, type: "kids", label: "E3", // Table 3 bleue haut gauche (prévue si besoin)
-            "prestataire": {x: 38, y: 72, type: "pro", label: "P"}  // Rond rouge bas
+            // Zones spécifiques (enfants bleues, prestataires rouge)
+            "enfants 1":  {cx: 460, cy: 240, type: "kids", label: "E1"}, // Cercle bleu bas droite proche table 24/22
+            "enfants 2":  {cx: 165, cy: 45,  type: "kids", label: "E2"}, // Cercle bleu haut gauche n°2
+            "enfants 3":  {cx: 130, cy: 68,  type: "kids", label: "E3"}, // Cercle bleu haut gauche n°3
+            "prestataire": {cx: 280, cy: 240, type: "pro", label: "P"}   // Cercle rouge bas proche du DJ
         };
 
         function navigateTo(screenId) {
@@ -645,12 +642,12 @@
             let positionDesc = "Plan de table d'ensemble";
             const tableNum = parseInt(guest.table);
             if (!isNaN(tableNum)) {
-                if ([1, 2, 3, 4, 5, 6].includes(tableNum)) positionDesc = "Proche de la table d'honneur";
-                else if ([17, 18, 19, 20].includes(tableNum)) positionDesc = "Fond de salle (côté entrée)";
-                else if (tableNum > 20) positionDesc = "Rangée extérieure périphérique";
-                else positionDesc = "Autour de la piste de danse";
+                if ([1, 2, 3, 4, 5, 6].includes(tableNum)) positionDesc = "Proche de la table d'honneur des mariés";
+                else if ([17, 18, 19, 20].includes(tableNum)) positionDesc = "Fond de salle (côté entrée gauche)";
+                else if (tableNum > 20) positionDesc = "Rangée extérieure périphérique (contre les murs)";
+                else positionDesc = "Ovale central autour de la piste de danse";
             } else if (guest.table.toLowerCase().includes('prestataire')) {
-                positionDesc = "Table dédiée aux prestataires (côté DJ)";
+                positionDesc = "Table des prestataires (côté DJ en bas)";
             } else if (guest.table.toLowerCase().includes('1')) {
                 positionDesc = "Espace enfants (bas de salle)";
             } else {
@@ -676,37 +673,48 @@
 
         function toggleMapMode() {
             const container = document.getElementById('map-container');
-            const blueprint = document.getElementById('blueprint-container');
+            const tablesGroup = document.getElementById('svg-tables-group');
             
-            // On nettoie les anciennes tables pour les recréer proprement
-            document.querySelectorAll('.table-dot').forEach(el => el.remove());
+            tablesGroup.innerHTML = ''; // Reset des éléments SVG
 
             if (container.style.display === 'none') {
                 container.style.display = 'block';
                 
-                // Génération des tables selon les positions réelles
+                const currentSearchClean = selectedGuestTable.toLowerCase().trim();
+
+                // Boucle de construction vectorielle stable
                 Object.keys(tablePositions).forEach(key => {
                     const pos = tablePositions[key];
-                    const dot = document.createElement('div');
                     
-                    dot.className = 'table-dot';
-                    if (pos.type === 'kids') dot.classList.add('kids');
-                    if (pos.type === 'pro') dot.classList.add('pro');
+                    // Création de l'élément cercle
+                    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                    circle.setAttribute("cx", pos.cx);
+                    circle.setAttribute("cy", pos.cy);
+                    circle.setAttribute("r", "12"); // Rayon uniforme idéal
                     
-                    dot.style.left = pos.x + '%';
-                    dot.style.top = pos.y + '%';
-                    dot.innerText = pos.label || key;
-
-                    // Logique d'illumination de la table cherchée
-                    const currentSearchClean = selectedGuestTable.toLowerCase().trim();
+                    let baseClass = "svg-table";
+                    if (pos.type === 'kids') baseClass += " kids";
+                    if (pos.type === 'pro') baseClass += " pro";
+                    
+                    // Gestion de la sélection lumineuse
                     if (currentSearchClean === key.toLowerCase() || 
-                        (key === "enfants 2" && currentSearchClean === "enfants 2")) {
-                        dot.classList.add('highlight');
+                        (key === "enfants 2" && currentSearchClean === "enfants 2") ||
+                        (key === "enfants 1" && currentSearchClean === "enfants 1")) {
+                        baseClass += " highlight";
                     } else if (selectedGuestTable !== "") {
-                        dot.classList.add('dimmed');
+                        baseClass += " dimmed";
                     }
                     
-                    blueprint.appendChild(dot);
+                    circle.setAttribute("class", baseClass);
+                    tablesGroup.appendChild(circle);
+
+                    // Création du texte au milieu du cercle
+                    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    text.setAttribute("x", pos.cx);
+                    text.setAttribute("y", pos.cy);
+                    text.setAttribute("class", "svg-text");
+                    text.textContent = pos.label || key;
+                    tablesGroup.appendChild(text);
                 });
             } else {
                 container.style.display = 'none';
