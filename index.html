@@ -446,11 +446,11 @@
             <div class="quote-heart">"Ce n'est pas la duree de la vie qui compte, mais la profondeur de l'amour."</div>
         </div>
 
-        <!-- ADMIN PANEL -->
-        <div class="admin-link" onclick="toggleAdminPanel()">Gestion de la liste (Organisateurs)</div>
+        <!-- ADMIN PANEL SECURED BY PASSWORD -->
+        <div class="admin-link" onclick="checkAdminPassword()">Gestion de la liste (Organisateurs)</div>
         
         <div class="admin-panel" id="admin-panel">
-            <h3 style="font-size: 12pt; margin-bottom: 10px; border-bottom: 1px solid var(--sand); padding-bottom: 6px;">Gestion de la liste</h3>
+            <h3 style="font-size: 12pt; margin-bottom: 10px; border-bottom: 1px solid var(--sand); padding-bottom: 6px;">Espace Organisateur</h3>
             
             <div class="form-group">
                 <label>Nom de l'invite</label>
@@ -465,6 +465,7 @@
             <div class="admin-list-container" id="admin-guests-list"></div>
             
             <button class="btn btn-secondary" style="margin-top: 15px; font-size:8pt; width:100%; padding: 6px;" onclick="exportCurrentDatabase()">Copier la base de données brute</button>
+            <button class="btn btn-secondary" style="margin-top: 5px; font-size:8pt; width:100%; padding: 6px; background-color: #fee2e2; border-color: #fca5a5;" onclick="lockAdminPanel()">🔒 Déconnexion / Verrouiller</button>
         </div>
 
     </div>
@@ -508,6 +509,7 @@
 
         let guestsDatabase = JSON.parse(localStorage.getItem('wedding_guests_db')) || defaultGuests;
         let selectedGuestTable = "";
+        let isAdminAuthenticated = false;
 
         function navigateTo(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -612,12 +614,36 @@
             }
         }
 
-        function toggleAdminPanel() {
+        // VERIFICATION PAR CODE PIN PROTEGEE
+        function checkAdminPassword() {
             const panel = document.getElementById('admin-panel');
-            panel.classList.toggle('active');
+            
+            // Si deja connecte, on clique pour fermer proprement
             if (panel.classList.contains('active')) {
+                panel.classList.remove('active');
+                return;
+            }
+
+            if (!isAdminAuthenticated) {
+                // Demande du mot de passe (Modifiable ci-dessous, actuellement '1234')
+                const pwd = prompt("Veuillez saisir le code d'accès organisateur :");
+                if (pwd === "admin1807") {
+                    isAdminAuthenticated = true;
+                    panel.classList.add('active');
+                    renderAdminList();
+                } else if (pwd !== null) {
+                    alert("Code incorrect. Accès refusé.");
+                }
+            } else {
+                panel.classList.add('active');
                 renderAdminList();
             }
+        }
+
+        function lockAdminPanel() {
+            isAdminAuthenticated = false;
+            document.getElementById('admin-panel').classList.remove('active');
+            alert("Espace verrouillé avec succès.");
         }
 
         function renderAdminList() {
@@ -636,6 +662,7 @@
         }
 
         function addGuestFromAdmin() {
+            if (!isAdminAuthenticated) return;
             const nameIn = document.getElementById('admin-name').value.trim();
             const tableIn = document.getElementById('admin-table').value.trim();
 
@@ -658,6 +685,7 @@
         }
 
         function deleteGuest(name) {
+            if (!isAdminAuthenticated) return;
             if(confirm(`Supprimer ${name} ?`)) {
                 guestsDatabase = guestsDatabase.filter(g => g.nom !== name);
                 saveAndSync();
