@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Générateur de QR Code - Mariage</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body { background: #FAF8F4; font-family: serif; text-align: center; padding-top: 50px; color: #333; }
+        .box { background: white; padding: 30px; display: inline-block; border-radius: 12px; border: 1px solid #E8DDCF; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        input { padding: 10px; width: 280px; border: 1px solid #D8C3A5; border-radius: 6px; margin-bottom: 20px; }
+        #qrcode { margin: 20px auto; display: flex; justify-content: center; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Votre QR Code de Mariage</h2>
+        <p style="color: #888; font-size: 10pt; margin-bottom: 20px;">Collez l'adresse de votre site ci-dessous :</p>
+        <input type="text" id="url" value="https://catherinejmz.github.io/Mariage-J-N/" oninput="generateQR()">
+        <div id="qrcode"></div>
+    </div>
+    <script>
+        var qr = new QRCode(document.getElementById("qrcode"), { width: 256, height: 256, colorDark : "#333333", colorLight : "#FFFFFF" });
+        function generateQR() { qr.makeCode(document.getElementById("url").value); }
+        generateQR();
+    </script>
+</body>
+</html>
