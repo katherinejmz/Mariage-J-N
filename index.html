@@ -286,7 +286,7 @@
         .svg-text {
             font-family: sans-serif;
             font-weight: bold;
-            font-size: 11px;
+            font-size: 10px;
             fill: #333333;
             text-anchor: middle;
             dominant-baseline: central;
@@ -309,7 +309,7 @@
         }
         .svg-table.highlight + text {
             fill: #333333 !important;
-            font-size: 13px !important;
+            font-size: 12px !important;
         }
 
         .svg-table.dimmed {
@@ -453,23 +453,23 @@
                 <div class="map-wrapper">
                     <svg viewBox="0 0 700 380" id="floorplan-svg">
                         <!-- Murs extérieurs de la pièce -->
-                        <rect x="15" y="15" width="670" height="350" fill="none" stroke="#d8c3a5" stroke-width="2"/>
+                        <rect x="15" y="15" width="670" height="350" fill="none" stroke="#d8c3a5" stroke-width="1.5"/>
                         
-                        <!-- Piste de danse centrale -->
-                        <ellipse cx="330" cy="190" rx="65" ry="35" fill="none" stroke="#d8c3a5" stroke-width="1.5" stroke-dasharray="4,4"/>
-                        <text x="330" y="190" font-family="serif" font-size="11px" fill="#d8c3a5" text-anchor="middle" font-style="italic">Piste de danse</text>
+                        <!-- Piste de danse centrale réalignée géométriquement -->
+                        <ellipse cx="340" cy="190" rx="95" ry="40" fill="none" stroke="#d8c3a5" stroke-width="1.5" stroke-dasharray="4,4"/>
+                        <text x="340" y="190" font-family="serif" font-size="11px" fill="#d8c3a5" text-anchor="middle" font-style="italic">Piste de danse</text>
                         
                         <!-- Table des Mariés (à droite de l'ovale) -->
-                        <rect x="525" y="160" width="25" height="60" rx="4" fill="#faf8f4" stroke="#c5a059" stroke-width="1.5"/>
-                        <text x="537" y="190" font-family="serif" font-size="10px" fill="#c5a059" text-anchor="middle" transform="rotate(-90 537 190)">Maries</text>
+                        <rect x="590" y="155" width="25" height="70" rx="4" fill="#faf8f4" stroke="#c5a059" stroke-width="1.5"/>
+                        <text x="602" y="190" font-family="serif" font-size="10px" fill="#c5a059" text-anchor="middle" transform="rotate(-90 602 190)">Maries</text>
                         
                         <!-- Buffets (Jaunes) -->
-                        <rect x="580" y="25" width="65" height="15" fill="#fef08a" stroke="#fde047" stroke-width="1"/>
-                        <text x="612" y="33" font-size="8px" fill="#888" text-anchor="middle">Buffet</text>
-                        <rect x="580" y="340" width="65" height="15" fill="#fef08a" stroke="#fde047" stroke-width="1"/>
-                        <text x="612" y="348" font-size="8px" fill="#888" text-anchor="middle">Buffet</text>
+                        <rect x="580" y="35" width="75" height="18" fill="#fef08a" stroke="#fde047" stroke-width="1"/>
+                        <text x="617" y="44" font-size="8px" fill="#666" text-anchor="middle">Buffet</text>
+                        <rect x="580" y="325" width="75" height="18" fill="#fef08a" stroke="#fde047" stroke-width="1"/>
+                        <text x="617" y="334" font-size="8px" fill="#666" text-anchor="middle">Buffet</text>
 
-                        <!-- Le script JS va injecter les ronds de tables ici de manière statique et sécurisée -->
+                        <!-- Le script JS va injecter les ronds de tables ici -->
                         <g id="svg-tables-group"></g>
                     </svg>
                 </div>
@@ -522,7 +522,7 @@
           {"nom": "Ali", "table": "12"}, {"nom": "Axel", "table": "12"}, {"nom": "Brunette", "table": "12"}, {"nom": "Dylan", "table": "12"}, {"nom": "Jerry", "table": "12"}, {"nom": "Keting", "table": "12"}, {"nom": "Wendy", "table": "12"}, {"nom": "Williames", "table": "12"}, {"nom": "Yannick", "table": "12"}, {"nom": "Steeven Chan se", "table": "12"},
           {"nom": "Ando", "table": "13"}, {"nom": "Andrianina", "table": "13"}, {"nom": "Coco", "table": "13"}, {"nom": "Fenitra", "table": "13"}, {"nom": "Lanto", "table": "13"}, {"nom": "Marinho", "table": "13"}, {"nom": "Melanie", "table": "13"}, {"nom": "Rico", "table": "13"}, {"nom": "Sidonie", "table": "13"}, {"nom": "Tsihoarana", "table": "13"},
           {"nom": "Dylan", "table": "14"}, {"nom": "Halima", "table": "14"}, {"nom": "Jamila", "table": "14"}, {"nom": "Janelle", "table": "14"}, {"nom": "Jemima", "table": "14"}, {"nom": "Leah", "table": "14"}, {"nom": "Meech", "table": "14"}, {"nom": "Samia", "table": "14"}, {"nom": "Shandy", "table": "14"}, {"nom": "Yanis", "table": "14"},
-          {"nom": "Christina", "table": "15"}, {"nom": "Felana", "table": "15"}, {"nom": "Grégoire", "table": "15"}, {"nom": "Haritiana", "table": "15"}, {"nom": "Kayden", "table": "15"}, {"nom": "Koloina", "table": "15"}, {"nom": "Princia", "span>": "15"}, {"nom": "Sandrina", "table": "15"}, {"nom": "Saphira", "table": "15"}, {"nom": "Vanyah", "table": "15"},
+          {"nom": "Christina", "table": "15"}, {"nom": "Felana", "table": "15"}, {"nom": "Grégoire", "table": "15"}, {"nom": "Haritiana", "table": "15"}, {"nom": "Kayden", "table": "15"}, {"nom": "Koloina", "table": "15"}, {"nom": "Princia", "table": "15"}, {"nom": "Sandrina", "table": "15"}, {"nom": "Saphira", "table": "15"}, {"nom": "Vanyah", "table": "15"},
           {"nom": "Aaron", "table": "16"}, {"nom": "Andry", "table": "16"}, {"nom": "Brandy", "table": "16"}, {"nom": "Fanny", "table": "16"}, {"nom": "Ines", "table": "16"}, {"nom": "Irinatiavina", "table": "16"}, {"nom": "Jason", "table": "16"}, {"nom": "Jonathan", "table": "16"}, {"nom": "Kevin", "table": "16"}, {"nom": "KV1", "table": "16"},
           {"nom": "Andréa", "table": "17"}, {"nom": "Caleb", "table": "17"}, {"nom": "Cécilia", "table": "17"}, {"nom": "Driiko", "table": "17"}, {"nom": "Inès", "table": "17"}, {"nom": "Kloe", "table": "17"}, {"nom": "Nyavo", "table": "17"}, {"nom": "Sofia", "table": "17"}, {"nom": "Victoria", "table": "17"}, {"nom": "Wincy", "table": "17"},
           {"nom": "Brice", "table": "18"}, {"nom": "David", "table": "18"}, {"nom": "Ezechias", "table": "18"}, {"nom": "Gabriel", "table": "18"}, {"nom": "Cracidi", "table": "18"}, {"nom": "Hans", "table": "18"}, {"nom": "Louise", "table": "18"}, {"nom": "Marvin", "table": "18"}, {"nom": "Samuel", "table": "18"}, {"nom": "Sitraka", "table": "18"},
@@ -547,53 +547,51 @@
         let selectedGuestTable = "";
         let isAdminAuthenticated = false;
 
-        // COORDONNÉES EN CODES PIXELS (Stables dans le viewBox SVG 700x380)
+        // RE-CALIBRAGE MILIEU GÉOMÉTRIQUE EXACT DE TOUTES LES TABLES (Fidèle au plan d'architecte)
         const tablePositions = {
-            // Ovale Intérieur - Ligne du haut (de droite à gauche)
-            "1":  {cx: 485, cy: 115},
-            "3":  {cx: 445, cy: 105},
-            "5":  {cx: 400, cy: 100},
-            "7":  {cx: 355, cy: 100},
-            "9":  {cx: 310, cy: 100},
-            "11": {cx: 265, cy: 105},
-            "13": {cx: 240, cy: 125},
-            "15": {cx: 215, cy: 110},
+            // Ovale Intérieur - Ligne supérieure (De gauche à droite)
+            "19": {cx: 160, cy: 155},
+            "17": {cx: 200, cy: 165},
+            "15": {cx: 235, cy: 140},
+            "13": {cx: 270, cy: 155},
+            "11": {cx: 310, cy: 130},
+            "9":  {cx: 360, cy: 130},
+            "7":  {cx: 410, cy: 130},
+            "5":  {cx: 460, cy: 135},
+            "3":  {cx: 510, cy: 145},
+            "1":  {cx: 555, cy: 155},
             
-            // Ovale Intérieur - Ligne du bas (de droite à gauche)
-            "2":  {cx: 475, cy: 200},
-            "4":  {cx: 435, cy: 210},
-            "6":  {cx: 395, cy: 215},
-            "8":  {cx: 350, cy: 215},
-            "10": {cx: 305, cy: 215},
-            "12": {cx: 260, cy: 210},
-            "14": {cx: 235, cy: 190},
-            "16": {cx: 210, cy: 210},
-            
-            // Fond gauche ovale intérieur
-            "17": {cx: 190, cy: 135},
-            "18": {cx: 185, cy: 185},
-            "19": {cx: 160, cy: 125},
-            "20": {cx: 155, cy: 195},
+            // Ovale Intérieur - Ligne inférieure (De gauche à droite)
+            "20": {cx: 155, cy: 225},
+            "18": {cx: 195, cy: 210},
+            "16": {cx: 230, cy: 235},
+            "14": {cx: 265, cy: 220},
+            "12": {cx: 305, cy: 245},
+            "10": {cx: 355, cy: 245},
+            "8":  {cx: 405, cy: 245},
+            "6":  {cx: 455, cy: 240},
+            "4":  {cx: 500, cy: 230},
+            "2":  {cx: 545, cy: 215},
 
-            // Ligne périphérique extérieure haute
-            "21": {cx: 520, cy: 45},
-            "23": {cx: 470, cy: 40},
-            "25": {cx: 425, cy: 38},
-            "27": {cx: 370, cy: 35},
-            "29": {cx: 295, cy: 35},
-            "30": {cx: 250, cy: 42},
+            // Rangée périphérique externe - Haut
+            "30": {cx: 255, cy: 75},
+            "29": {cx: 315, cy: 70},
+            "27": {cx: 395, cy: 70},
+            "25": {cx: 465, cy: 75},
+            "23": {cx: 520, cy: 85},
+            "21": {cx: 570, cy: 100},
 
-            // Ligne périphérique extérieure basse
-            "22": {cx: 510, cy: 235},
-            "24": {cx: 410, cy: 235},
-            "26": {cx: 235, cy: 240},
-            "28": {cx: 190, cy: 235},
+            // Rangée périphérique externe - Bas
+            "28": {cx: 185, cy: 285},
+            "26": {cx: 235, cy: 295},
+            "24": {cx: 430, cy: 295},
+            "22": {cx: 550, cy: 280},
 
-            // Zones spécifiques (enfants bleues, prestataires rouge)
-            "enfants 1":  {cx: 460, cy: 240, type: "kids", label: "E1"}, // Cercle bleu bas droite proche table 24/22
-            "enfants 2":  {cx: 165, cy: 45,  type: "kids", label: "E2"}, // Cercle bleu haut gauche n°2
-            "enfants 3":  {cx: 130, cy: 68,  type: "kids", label: "E3"}, // Cercle bleu haut gauche n°3
-            "prestataire": {cx: 280, cy: 240, type: "pro", label: "P"}   // Cercle rouge bas proche du DJ
+            // Tables bleues (Enfants) et Rouge (Prestataires)
+            "enfants 1":  {cx: 485, cy: 295, type: "kids", label: "E1"},
+            "enfants 2":  {cx: 165, cy: 65,  type: "kids", label: "E2"},
+            "enfants 3":  {cx: 130, cy: 95,  type: "kids", label: "E3"},
+            "prestataire": {cx: 290, cy: 295, type: "pro", label: "P"}
         };
 
         function navigateTo(screenId) {
@@ -649,9 +647,11 @@
             } else if (guest.table.toLowerCase().includes('prestataire')) {
                 positionDesc = "Table des prestataires (côté DJ en bas)";
             } else if (guest.table.toLowerCase().includes('1')) {
-                positionDesc = "Espace enfants (bas de salle)";
+                positionDesc = "Espace enfants 1 (bas de salle)";
+            } else if (guest.table.toLowerCase().includes('2')) {
+                positionDesc = "Espace enfants 2 (haut gauche de salle)";
             } else {
-                positionDesc = "Espace enfants (haut gauche de salle)";
+                positionDesc = "Espace enfants (haut gauche)";
             }
             document.getElementById('res-table-loc').innerText = positionDesc;
 
@@ -675,28 +675,25 @@
             const container = document.getElementById('map-container');
             const tablesGroup = document.getElementById('svg-tables-group');
             
-            tablesGroup.innerHTML = ''; // Reset des éléments SVG
+            tablesGroup.innerHTML = ''; 
 
             if (container.style.display === 'none') {
                 container.style.display = 'block';
                 
                 const currentSearchClean = selectedGuestTable.toLowerCase().trim();
 
-                // Boucle de construction vectorielle stable
                 Object.keys(tablePositions).forEach(key => {
                     const pos = tablePositions[key];
                     
-                    // Création de l'élément cercle
                     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
                     circle.setAttribute("cx", pos.cx);
                     circle.setAttribute("cy", pos.cy);
-                    circle.setAttribute("r", "12"); // Rayon uniforme idéal
+                    circle.setAttribute("r", "11.5"); 
                     
                     let baseClass = "svg-table";
                     if (pos.type === 'kids') baseClass += " kids";
                     if (pos.type === 'pro') baseClass += " pro";
                     
-                    // Gestion de la sélection lumineuse
                     if (currentSearchClean === key.toLowerCase() || 
                         (key === "enfants 2" && currentSearchClean === "enfants 2") ||
                         (key === "enfants 1" && currentSearchClean === "enfants 1")) {
@@ -708,7 +705,6 @@
                     circle.setAttribute("class", baseClass);
                     tablesGroup.appendChild(circle);
 
-                    // Création du texte au milieu du cercle
                     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
                     text.setAttribute("x", pos.cx);
                     text.setAttribute("y", pos.cy);
